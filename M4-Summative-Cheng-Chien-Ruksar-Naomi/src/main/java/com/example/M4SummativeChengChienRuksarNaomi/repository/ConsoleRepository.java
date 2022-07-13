@@ -11,4 +11,6 @@ import java.util.List;
 public interface ConsoleRepository extends JpaRepository<Console, Integer> {
 
     List<Games> findByManufacturer(String manufacturer);
+
+
 }
