@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -13,23 +14,23 @@ public class Games {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "game_id")
-    private int id;
+    @NotNull
+    private Integer id;
     @Column(name = "esrb_rating")
+    @NotNull
     private String esrbRating;
+    @NotNull
     private String title;
+    @NotNull
     private String description;
+    @NotNull
     private double decimal;
+    @NotNull
     private String studio;
+    @NotNull
     private int quantity;
 
-    public int getId() {
-        return id;
-    }
-
-    public Games() {
-    }
-
-    public Games(int id, String esrbRating, String title, String description, double decimal, String studio, int quantity) {
+    public Games(Integer id, String esrbRating, String title, String description, double decimal, String studio, int quantity) {
         this.id = id;
         this.esrbRating = esrbRating;
         this.title = title;
@@ -39,7 +40,14 @@ public class Games {
         this.quantity = quantity;
     }
 
-    public void setId(int id) {
+    public Games() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -94,14 +102,14 @@ public class Games {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Games)) return false;
         Games games = (Games) o;
-        return id == games.id && Double.compare(games.decimal, decimal) == 0 && quantity == games.quantity && Objects.equals(esrbRating, games.esrbRating) && Objects.equals(title, games.title) && Objects.equals(description, games.description) && Objects.equals(studio, games.studio);
+        return Double.compare(games.getDecimal(), getDecimal()) == 0 && getQuantity() == games.getQuantity() && Objects.equals(getId(), games.getId()) && Objects.equals(getEsrbRating(), games.getEsrbRating()) && Objects.equals(getTitle(), games.getTitle()) && Objects.equals(getDescription(), games.getDescription()) && Objects.equals(getStudio(), games.getStudio());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, esrbRating, title, description, decimal, studio, quantity);
+        return Objects.hash(getId(), getEsrbRating(), getTitle(), getDescription(), getDecimal(), getStudio(), getQuantity());
     }
 
     @Override
