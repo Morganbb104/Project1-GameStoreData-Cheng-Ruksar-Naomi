@@ -3,11 +3,13 @@ package com.example.M4SummativeChengChienRuksarNaomi.service;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Games;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Invoice;
+import com.example.M4SummativeChengChienRuksarNaomi.models.ProcessingFee;
 import com.example.M4SummativeChengChienRuksarNaomi.models.SalesTaxRate;
 import com.example.M4SummativeChengChienRuksarNaomi.repository.*;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ConsoleViewModel;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.GameViewModel;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.InvoiceViewModel;
+import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ProcessingFeeViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -102,8 +104,8 @@ public class ServiceLayer {
             List<GameViewModel> gvmList = new ArrayList<>();
 
             for (Games game : gamesList) {
-                GameViewModel avm = buildGameViewModel(game);
-                gvmList.add(avm);
+                GameViewModel gvm = buildGameViewModel(game);
+                gvmList.add(gvm);
             }
 
             return gvmList;
@@ -163,32 +165,129 @@ public class ServiceLayer {
         return viewModel;
     }
 
-//    public InvoiceViewModel findInvoice(Integer id) {
-//
-//        // Get the invoice object first
-//        Optional<Invoice> invoice = invoiceRepository.findById(id);
-//
-//        return invoice.isPresent() ? buildInvoiceViewModel(invoice.get()) : null;
-//    }
+    public InvoiceViewModel findInvoice(Integer id) {
 
-//    private InvoiceViewModel buildInvoiceViewModel(Invoice invoice) {
+        // Get the invoice object first
+        Optional<Invoice> invoice = invoiceRepository.findById(id);
+
+        return invoice.isPresent() ? buildInvoiceViewModel(invoice.get()) : null;
+    }
+
+    private InvoiceViewModel buildInvoiceViewModel(Invoice invoice) {
+
+        // Get the associated invoice
+        // Optional<SalesTaxRate> salesTax = salesTaxRateRepository.findById(game.getId());
+
+        // Assemble the InvoiceViewModel
+        InvoiceViewModel ivm = new InvoiceViewModel();
+        ivm.setId(invoice.getId());
+        ivm.setName(invoice.getName());
+        ivm.setStreet(invoice.getStreet());
+        ivm.setCity(invoice.getCity());
+        ivm.setState(invoice.getState());
+        ivm.setZipcode(invoice.getZipcode());
+        ivm.setItemId(invoice.getItemId());
+        ivm.setUnitPrice(invoice.getUnitPrice());
+        ivm.setQuantity(invoice.getQuantity());
+        ivm.setSubtotal(invoice.getSubtotal());
+        ivm.setTax(invoice.getTax());
+        ivm.setProcessingFee(invoice.getProcessingFee());
+        ivm.setTotal(invoice.getTotal());
+
+        // Return the AlbumViewModel
+        return ivm;
+    }
+
+    public List<InvoiceViewModel> findAllInvoice() {
+
+        List<Invoice> invoiceList = invoiceRepository.findAll();
+
+        List<InvoiceViewModel> ivmList = new ArrayList<>();
+
+        for (Invoice invoice : invoiceList) {
+            InvoiceViewModel ivm = buildInvoiceViewModel(invoice);
+            ivmList.add(ivm);
+        }
+
+        return ivmList;
+    }
+
+    @Transactional
+    public void updateInvoice(InvoiceViewModel viewModel) {
+
+        // Update the album information
+        Invoice invoice= new Invoice();
+        invoice.setId(viewModel.getId());
+        invoice.setName(viewModel.getName());
+        invoice.setStreet(viewModel.getStreet());
+        invoice.setCity(viewModel.getCity());
+        invoice.setState(viewModel.getState());
+        invoice.setZipcode(viewModel.getZipcode());
+        invoice.setItemId(viewModel.getItemId());
+        invoice.setUnitPrice(viewModel.getUnitPrice());
+        invoice.setQuantity(viewModel.getQuantity());
+        invoice.setSubtotal(viewModel.getSubtotal());
+        invoice.setTax(viewModel.getTax());
+        invoice.setProcessingFee(viewModel.getProcessingFee());
+        invoice.setTotal(viewModel.getTotal());
+
+
+        invoiceRepository.save(invoice);
+
+    }
+
+    @Transactional
+    public void removeInvoice(int id) {
+
+
+        // Remove invoice
+        invoiceRepository.deleteById(id);
+
+    }
+
+//    @Transactional
+//    public ProcessingFeeViewModel saveProcessingFee(ProcessingFeeViewModel viewModel) {
+
+        // Persist ProcessingFee
+//        ProcessingFee processingFee = new ProcessingFee();
+//        processingFee.setProductType(viewModel.getProductType());
 //
-//        // Get the associated invoice
-//        // Optional<SalesTaxRate> salesTax = salesTaxRateRepository.findById(game.getId());
+//        processingFee.setProductType(viewModel.getProductType());
+//        game.setQuantity(viewModel.getQuantity());
+
 //
-//        // Assemble the InvoiceViewModel
-//        InvoiceViewModel ivm = new InvoiceViewModel();
-//        ivm.setId(invoice.getId());
-//        ivm.setTitle(game.getTitle());
-//        ivm.setDescription(game.getDescription());
-//        ivm.setPrice(game.getPrice());
-//        ivm.setEsrbRating(game.getEsrbRating());
-//        ivm.setQuantity(game.getQuantity());
-//        ivm.setStudio(game.getStudio());
+//        processingFee = processingFeeRepository.save(processingFee);
+//        viewModel.setId(game.getId());
+//
+//        return viewModel;
+//    }
+//
+//    public GameViewModel findGame(Integer id) {
+//
+//        // Get the Game object first
+//        Optional<Games> game = gameRepository.findById(id);
+//
+//        return game.isPresent() ? buildGameViewModel(game.get()) : null;
+//    }
+//
+//    private GameViewModel buildGameViewModel(Games game) {
+//
+//        // Get the associated Game
+//        // Optional<Game> game = gameRepository.findById(game.getId());
+//
+//        // Assemble the GameViewModel
+//        GameViewModel gvm = new GameViewModel();
+//        gvm.setId(game.getId());
+//        gvm.setTitle(game.getTitle());
+//        gvm.setDescription(game.getDescription());
+//        gvm.setPrice(game.getPrice());
+//        gvm.setEsrbRating(game.getEsrbRating());
+//        gvm.setQuantity(game.getQuantity());
+//        gvm.setStudio(game.getStudio());
 //
 //
-//        // Return the AlbumViewModel
-//        return ivm;
+//        // Return the GameViewModel
+//        return gvm;
 //    }
 //
 //    public List<GameViewModel> findAllGames() {
@@ -198,8 +297,8 @@ public class ServiceLayer {
 //        List<GameViewModel> gvmList = new ArrayList<>();
 //
 //        for (Games game : gamesList) {
-//            GameViewModel avm = buildGameViewModel(game);
-//            gvmList.add(avm);
+//            GameViewModel gvm = buildGameViewModel(game);
+//            gvmList.add(gvm);
 //        }
 //
 //        return gvmList;
@@ -208,7 +307,7 @@ public class ServiceLayer {
 //    @Transactional
 //    public void updateGame(GameViewModel viewModel) {
 //
-//        // Update the album information
+//        // Update the game information
 //        Games game= new Games();
 //        game.setId(viewModel.getId());
 //        game.setTitle(viewModel.getTitle());
@@ -227,10 +326,11 @@ public class ServiceLayer {
 //    public void removeGame(int id) {
 //
 //
-//        // Remove album
+//        // Remove game
 //        gameRepository.deleteById(id);
-
+//
 //    }
+
 
 
 
@@ -281,6 +381,7 @@ public class ServiceLayer {
 
 
         return consoleView;
+
     }
 
 

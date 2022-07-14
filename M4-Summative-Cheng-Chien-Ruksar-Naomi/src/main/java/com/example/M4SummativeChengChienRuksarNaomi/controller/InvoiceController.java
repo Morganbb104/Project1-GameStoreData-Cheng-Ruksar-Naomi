@@ -29,7 +29,7 @@ public class InvoiceController {
     }
     @GetMapping("/invoice")
     @ResponseStatus(HttpStatus.OK)
-    public List<invoiceViewModel> getAllInvoices() {
+    public List<InvoiceViewModel> getAllInvoices() {
         return serviceLayer.findAllInvoice();
 
     }
@@ -43,7 +43,7 @@ public class InvoiceController {
     @PutMapping("/invoice/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateInvoice(@RequestBody InvoiceViewModel invoiceViewModel) {
-        serviceLayer.updateGame(invoiceViewModel);
+        serviceLayer.updateInvoice(invoiceViewModel);
     }
     @DeleteMapping("/invoice/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
