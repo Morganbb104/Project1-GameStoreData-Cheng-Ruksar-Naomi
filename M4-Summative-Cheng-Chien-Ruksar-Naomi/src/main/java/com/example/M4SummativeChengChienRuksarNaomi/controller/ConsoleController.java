@@ -1,6 +1,8 @@
 package com.example.M4SummativeChengChienRuksarNaomi.controller;
 
-
+import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
+import com.example.M4SummativeChengChienRuksarNaomi.repository.ConsoleRepository;
+import com.example.M4SummativeChengChienRuksarNaomi.service.ServiceLayer;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ConsoleViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,34 +15,38 @@ import java.util.List;
 public class ConsoleController {
 
     @Autowired
-    ConsoleService consoleService;
+    ConsoleRepository consoleRepository;
+
+    @Autowired
+    ServiceLayer serviceLayer;
+
 
     @GetMapping("/consoles")
     @ResponseStatus(HttpStatus.OK)
     public List<ConsoleViewModel> getConsoles(){
-        return consoleService.findAllConsoles();
+        return consoleRepository.findAllConsoles();
     }
 
     @GetMapping("/consoles/{id}")
     public ConsoleViewModel getConsoleById(@PathVariable int id) {
-        return consoleService.findConsoleById(id);
+        return consoleRepository.findConsoleById(id);
     }
 
     @PostMapping("/consoles")
     @ResponseStatus(HttpStatus.CREATED)
     public ConsoleViewModel addConsole(@RequestBody  @Valid ConsoleViewModel consoleviewModel) {
-        return consoleService.saveConsole(consoleviewModel);
+        return consoleRepository.saveConsole(consoleviewModel);
     }
 
     @PutMapping("/consoles")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateConsole(@RequestBody @Valid ConsoleViewModel consoleViewModel) {
-        consoleService.updateConsole(consoleViewModel);
+        consoleRepository.updateConsole(consoleViewModel);
     }
 
     @DeleteMapping("/consoles/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteConsole(@PathVariable int id) {
-        consoleService.deleteConsole(id);
+        consoleRepository.removeConsole(id);
     }
 }
