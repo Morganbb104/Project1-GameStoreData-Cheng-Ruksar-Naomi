@@ -1,33 +1,27 @@
-package com.example.M4SummativeChengChienRuksarNaomi.models;
+package com.example.M4SummativeChengChienRuksarNaomi.viewmodel;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.example.M4SummativeChengChienRuksarNaomi.models.SalesTaxRate;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "sales_tax_rate")
-public class SalesTaxRate {
+public class SalesTaxRateViewModel {
 
     @NotNull
     @Size(min = 2, max = 2)
-    public String state;
+    private String state;
 
     @NotNull
-    public BigDecimal rate;
+    private BigDecimal rate;
 
-    public SalesTaxRate(String state, BigDecimal rate) {
+    public void SalesTaxRate(String state, BigDecimal rate) {
         this.state = state;
         this.rate = rate;
     }
 
-    public SalesTaxRate() {
+    public void SalesTaxRate() {
     }
 
     @Override
@@ -51,3 +45,4 @@ public class SalesTaxRate {
                 '}';
     }
 }
+
