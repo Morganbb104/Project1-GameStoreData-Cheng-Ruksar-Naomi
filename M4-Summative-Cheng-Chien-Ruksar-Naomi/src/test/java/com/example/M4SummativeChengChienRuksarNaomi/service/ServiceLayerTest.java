@@ -27,6 +27,8 @@ public class ServiceLayerTest {
     ProcessingFeeRepository processingFeeRepository;
     SalesTaxRateRepository salesTaxRateRepository;
     TshirtRepository tshirtRepository;
+
+    InvoiceRepository invoiceRepository;
     @Before
     public void setUp() throws Exception{
         setUpGameRepositoryMock();
@@ -35,7 +37,7 @@ public class ServiceLayerTest {
         setUpProcessingFeeRepositoryMock();
         setUpSalesTaxRateRepositoryMock();
         serviceLayer= new ServiceLayer(gameRepository, consoleRepository,
-                 tshirtRepository, processingFeeRepository, salesTaxRateRepository);
+                 tshirtRepository, processingFeeRepository, salesTaxRateRepository,invoiceRepository);
         Games game= new Games();
 
         game.setTitle("Star Wars");
