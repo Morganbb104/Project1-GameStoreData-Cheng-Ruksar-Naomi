@@ -1,9 +1,11 @@
 package com.example.M4SummativeChengChienRuksarNaomi.service;
 
+import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Games;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Invoice;
 import com.example.M4SummativeChengChienRuksarNaomi.models.SalesTaxRate;
 import com.example.M4SummativeChengChienRuksarNaomi.repository.*;
+import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ConsoleViewModel;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.GameViewModel;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -229,7 +231,100 @@ public class ServiceLayer {
 //        gameRepository.deleteById(id);
 
 //    }
+
+
+
+
+    @Transactional
+    public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
+        Console console = new Console();
+        console.setManufacturer(viewModel.getManufacturer());
+        console.setModel(viewModel.getModel());
+        console.setMemoryAmount(viewModel.getMemoryAmount());
+        console.setProcessor(viewModel.getProcessor());
+        console.setPrice(viewModel.getPrice());
+        console.setQuantity(viewModel.getQuantity());
+
+        console=consoleRepository.save(console);
+
+        viewModel.setId(console.getConsoleId());
+
+
+
+        return viewModel;
+
+
+
     }
+
+    public ConsoleViewModel findConsoleById(int id) {
+
+        Optional<Console> console = consoleRepository.findById(id);
+
+        return console.isPresent() ? buildConsoleViewModel(console.get()) : null;
+    }
+
+    private ConsoleViewModel buildConsoleViewModel(Console console) {
+
+
+        Optional<Games> game = gameRepository.findById(console.getConsoleId());
+
+
+        ConsoleViewModel consoleView = new ConsoleViewModel();
+        consoleView.setId(console.getConsoleId());
+        consoleView.setModel(console.getModel());
+        consoleView.setManufacturer(console.getManufacturer());
+        consoleView.setMemoryAmount(console.getMemoryAmount());
+        consoleView.setProcessor(console.getProcessor());
+        consoleView.setPrice(console.getPrice());
+        consoleView.setQuantity(console.getQuantity());
+
+
+        return consoleView;
+    }
+
+
+    public List<ConsoleViewModel> findAllConsoles() {
+
+        List<Console> consoleList = consoleRepository.findAll();
+
+        List<ConsoleViewModel> cvmList = new ArrayList<>();
+
+        for (Console console : consoleList) {
+            ConsoleViewModel cvm = buildConsoleViewModel(console);
+            cvmList.add(cvm);
+        }
+
+        return cvmList;
+    }
+
+
+    @Transactional
+    public void updateConsole(ConsoleViewModel viewModel) {
+
+
+
+        Console console = new Console();
+        console.setManufacturer(viewModel.getManufacturer());
+        console.setModel(viewModel.getModel());
+        console.setMemoryAmount(viewModel.getMemoryAmount());
+        console.setProcessor(viewModel.getProcessor());
+        console.setPrice(viewModel.getPrice());
+        console.setQuantity(viewModel.getQuantity());
+        consoleRepository.save(console);
+
+
+    }
+
+    @Transactional
+    public void removeConsole(int id) {
+
+
+        consoleRepository.deleteById(id);
+
+    }
+
+}
 
 
 

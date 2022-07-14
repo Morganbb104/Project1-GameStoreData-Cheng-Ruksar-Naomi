@@ -132,4 +132,9 @@ public class Console {
                 ", quantity=" + quantity +
                 '}';
     }
+
+    public Integer getConsoleId() {
+
+        return id;
+    }
 }
