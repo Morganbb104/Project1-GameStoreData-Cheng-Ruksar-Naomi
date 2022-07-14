@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -19,9 +20,9 @@ public class SalesTaxRate {
     private String state;
 
     @NotNull
-    private double rate;
+    private BigDecimal rate;
 
-    public SalesTaxRate(String state, double rate) {
+    public SalesTaxRate(String state, BigDecimal rate) {
         this.state = state;
         this.rate = rate;
     }
@@ -29,33 +30,17 @@ public class SalesTaxRate {
     public SalesTaxRate() {
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SalesTaxRate)) return false;
         SalesTaxRate that = (SalesTaxRate) o;
-        return Double.compare(that.getRate(), getRate()) == 0 && Objects.equals(getState(), that.getState());
+        return Objects.equals(state, that.state) && Objects.equals(rate, that.rate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getState(), getRate());
+        return Objects.hash(state, rate);
     }
 
     @Override

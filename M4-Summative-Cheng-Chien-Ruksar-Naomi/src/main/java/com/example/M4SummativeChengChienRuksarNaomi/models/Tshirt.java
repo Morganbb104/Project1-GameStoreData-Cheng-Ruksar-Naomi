@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -27,12 +28,12 @@ public class Tshirt {
     private String description;
 
     @NotNull
-    private double price;
+    private BigDecimal price;
 
     @NotNull
     private int quantity;
 
-    public Tshirt(Integer id, String size, String color, String description, double price, int quantity) {
+    public Tshirt(Integer id, String size, String color, String description, BigDecimal price, int quantity) {
         this.id = id;
         this.size = size;
         this.color = color;
@@ -76,11 +77,11 @@ public class Tshirt {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -97,7 +98,7 @@ public class Tshirt {
         if (this == o) return true;
         if (!(o instanceof Tshirt)) return false;
         Tshirt tshirt = (Tshirt) o;
-        return Double.compare(tshirt.getPrice(), getPrice()) == 0 && getQuantity() == tshirt.getQuantity() && Objects.equals(getId(), tshirt.getId()) && Objects.equals(getSize(), tshirt.getSize()) && Objects.equals(getColor(), tshirt.getColor()) && Objects.equals(getDescription(), tshirt.getDescription());
+        return getQuantity() == tshirt.getQuantity() && Objects.equals(getId(), tshirt.getId()) && Objects.equals(getSize(), tshirt.getSize()) && Objects.equals(getColor(), tshirt.getColor()) && Objects.equals(getDescription(), tshirt.getDescription()) && Objects.equals(getPrice(), tshirt.getPrice());
     }
 
     @Override

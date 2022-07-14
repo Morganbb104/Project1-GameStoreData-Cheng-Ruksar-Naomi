@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -17,9 +18,9 @@ public class ProcessingFee {
     @Column(name = "product_type")
     private String productType;
 
-    private double fee;
+    private BigDecimal fee;
 
-    public ProcessingFee(String productType, double fee) {
+    public ProcessingFee(String productType, BigDecimal fee) {
         this.productType = productType;
         this.fee = fee;
     }
@@ -35,11 +36,11 @@ public class ProcessingFee {
         this.productType = productType;
     }
 
-    public double getFee() {
+    public BigDecimal getFee() {
         return fee;
     }
 
-    public void setFee(double fee) {
+    public void setFee(BigDecimal fee) {
         this.fee = fee;
     }
 
@@ -48,7 +49,7 @@ public class ProcessingFee {
         if (this == o) return true;
         if (!(o instanceof ProcessingFee)) return false;
         ProcessingFee that = (ProcessingFee) o;
-        return Double.compare(that.getFee(), getFee()) == 0 && Objects.equals(getProductType(), that.getProductType());
+        return Objects.equals(getProductType(), that.getProductType()) && Objects.equals(getFee(), that.getFee());
     }
 
     @Override

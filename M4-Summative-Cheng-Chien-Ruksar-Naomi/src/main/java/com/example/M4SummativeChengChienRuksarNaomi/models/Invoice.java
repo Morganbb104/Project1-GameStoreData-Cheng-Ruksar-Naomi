@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -43,25 +44,25 @@ public class Invoice {
 
     @NotNull
     @Column(name = "unit_price")
-    private double unitPrice;
+    private BigDecimal unitPrice;
 
     @NotNull
     private int quantity;
 
     @NotNull
-    private double subtotal;
+    private BigDecimal subtotal;
 
     @NotNull
-    private double tax;
+    private BigDecimal tax;
 
     @NotNull
     @Column(name = "processing_fee")
-    private double processingFee;
+    private BigDecimal processingFee;
 
     @NotNull
-    private double total;
+    private BigDecimal total;
 
-    public Invoice(Integer id, String name, String street, String city, String state, String zipcode, String itemType, int itemId, double unitPrice, int quantity, double subtotal, double tax, double processingFee, double total) {
+    public Invoice(Integer id, String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
         this.id = id;
         this.name = name;
         this.street = street;
@@ -145,11 +146,11 @@ public class Invoice {
         this.itemId = itemId;
     }
 
-    public double getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -161,35 +162,35 @@ public class Invoice {
         this.quantity = quantity;
     }
 
-    public double getSubtotal() {
+    public BigDecimal getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(double subtotal) {
+    public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
     }
 
-    public double getTax() {
+    public BigDecimal getTax() {
         return tax;
     }
 
-    public void setTax(double tax) {
+    public void setTax(BigDecimal tax) {
         this.tax = tax;
     }
 
-    public double getProcessingFee() {
+    public BigDecimal getProcessingFee() {
         return processingFee;
     }
 
-    public void setProcessingFee(double processingFee) {
+    public void setProcessingFee(BigDecimal processingFee) {
         this.processingFee = processingFee;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
@@ -198,7 +199,7 @@ public class Invoice {
         if (this == o) return true;
         if (!(o instanceof Invoice)) return false;
         Invoice invoice = (Invoice) o;
-        return getItemId() == invoice.getItemId() && Double.compare(invoice.getUnitPrice(), getUnitPrice()) == 0 && getQuantity() == invoice.getQuantity() && Double.compare(invoice.getSubtotal(), getSubtotal()) == 0 && Double.compare(invoice.getTax(), getTax()) == 0 && Double.compare(invoice.getProcessingFee(), getProcessingFee()) == 0 && Double.compare(invoice.getTotal(), getTotal()) == 0 && Objects.equals(getId(), invoice.getId()) && Objects.equals(getName(), invoice.getName()) && Objects.equals(getStreet(), invoice.getStreet()) && Objects.equals(getCity(), invoice.getCity()) && Objects.equals(getState(), invoice.getState()) && Objects.equals(getZipcode(), invoice.getZipcode()) && Objects.equals(getItemType(), invoice.getItemType());
+        return getItemId() == invoice.getItemId() && getQuantity() == invoice.getQuantity() && Objects.equals(getId(), invoice.getId()) && Objects.equals(getName(), invoice.getName()) && Objects.equals(getStreet(), invoice.getStreet()) && Objects.equals(getCity(), invoice.getCity()) && Objects.equals(getState(), invoice.getState()) && Objects.equals(getZipcode(), invoice.getZipcode()) && Objects.equals(getItemType(), invoice.getItemType()) && Objects.equals(getUnitPrice(), invoice.getUnitPrice()) && Objects.equals(getSubtotal(), invoice.getSubtotal()) && Objects.equals(getTax(), invoice.getTax()) && Objects.equals(getProcessingFee(), invoice.getProcessingFee()) && Objects.equals(getTotal(), invoice.getTotal());
     }
 
     @Override
