@@ -24,23 +24,24 @@ public class GameViewModel {
     @NotNull
     private String description;
     @NotNull
-    private double decimal;
+    private double price;
     @NotNull
     private String studio;
     @NotNull
     private int quantity;
 
-    public GameViewModel(Integer id, String esrbRating, String title, String description, double decimal, String studio, int quantity) {
+
+    public GameViewModel() {
+    }
+
+    public GameViewModel(Integer id, String esrbRating, String title, String description, double price, String studio, int quantity) {
         this.id = id;
         this.esrbRating = esrbRating;
         this.title = title;
         this.description = description;
-        this.decimal = decimal;
+        this.price = price;
         this.studio = studio;
         this.quantity = quantity;
-    }
-
-    public GameViewModel() {
     }
 
     public Integer getId() {
@@ -75,12 +76,12 @@ public class GameViewModel {
         this.description = description;
     }
 
-    public double getDecimal() {
-        return decimal;
+    public double getPrice() {
+        return price;
     }
 
-    public void setDecimal(double decimal) {
-        this.decimal = decimal;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getStudio() {
@@ -102,26 +103,27 @@ public class GameViewModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Games)) return false;
-        Games games = (Games) o;
-        return Double.compare(games.getDecimal(), getDecimal()) == 0 && getQuantity() == games.getQuantity() && Objects.equals(getId(), games.getId()) && Objects.equals(getEsrbRating(), games.getEsrbRating()) && Objects.equals(getTitle(), games.getTitle()) && Objects.equals(getDescription(), games.getDescription()) && Objects.equals(getStudio(), games.getStudio());
+        if (o == null || getClass() != o.getClass()) return false;
+        GameViewModel that = (GameViewModel) o;
+        return Double.compare(that.price, price) == 0 && quantity == that.quantity && Objects.equals(id, that.id) && Objects.equals(esrbRating, that.esrbRating) && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(studio, that.studio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getEsrbRating(), getTitle(), getDescription(), getDecimal(), getStudio(), getQuantity());
+        return Objects.hash(id, esrbRating, title, description, price, studio, quantity);
     }
 
     @Override
     public String toString() {
-        return "Games{" +
+        return "GameViewModel{" +
                 "id=" + id +
                 ", esrbRating='" + esrbRating + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", decimal=" + decimal +
+                ", price=" + price +
                 ", studio='" + studio + '\'' +
                 ", quantity=" + quantity +
                 '}';
     }
 }
+
