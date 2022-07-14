@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doReturn;
 
 
@@ -54,13 +55,27 @@ public class ServiceLayerTest {
         game.setQuantity(4);
         game.setEsrbRating("not suitable for children");
         game =serviceLayer.saveGame(game);
-        GameViewModel gvm= serviceLayer.findGame();
+        //GameViewModel gvm= serviceLayer.findGame();
 
 
     }
 
     @Test
     public void findGame() {
+        GameViewModel expectedGameViewModel =new GameViewModel();
+        expectedGameViewModel.setId(1);
+        expectedGameViewModel.setTitle("Star Wars");
+        expectedGameViewModel.setPrice(50);
+        expectedGameViewModel.setStudio("Lucas Films");
+        expectedGameViewModel.setDescription("Its basically harry potter but in space");
+        expectedGameViewModel.setQuantity(4);
+        expectedGameViewModel.setEsrbRating("not suitable for children");
+
+        expectedGameViewModel.getId();
+
+
+
+
 
     }
 
