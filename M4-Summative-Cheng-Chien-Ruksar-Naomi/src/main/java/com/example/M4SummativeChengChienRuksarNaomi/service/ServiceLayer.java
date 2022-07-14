@@ -16,19 +16,15 @@ import java.util.Optional;
 @Service
 @Component
 public class ServiceLayer {
-    @Autowired
+
     private GameRepository gameRepository;
 
-    @Autowired
     private ConsoleRepository consoleRepository;
 
-    @Autowired
     private TshirtRepository tshirtRepository;
 
-    @Autowired
     private ProcessingFeeRepository processingFeeRepository;
 
-    @Autowired
     private SalesTaxRateRepository salesTaxRateRepository;
 
 

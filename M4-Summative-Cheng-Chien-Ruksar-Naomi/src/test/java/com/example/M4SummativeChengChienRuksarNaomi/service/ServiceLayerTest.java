@@ -26,6 +26,8 @@ public class ServiceLayerTest {
     @Before
     public void setUp() throws Exception{
         setUpGameRepositoryMock();
+        serviceLayer= new ServiceLayer(gameRepository, consoleRepository,
+                 tshirtRepository, processingFeeRepository, salesTaxRateRepository);
         Games game= new Games();
 
         game.setTitle("Star Wars");
@@ -43,11 +45,23 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void saveGame() {
+    public void shouldSaveGame() {
+        GameViewModel game =new GameViewModel();
+        game.setTitle("Star Wars");
+        game.setPrice(50);
+        game.setStudio("Lucas Films");
+        game.setDescription("Its basically harry potter but in space");
+        game.setQuantity(4);
+        game.setEsrbRating("not suitable for children");
+        game =serviceLayer.saveGame(game);
+        GameViewModel gvm= serviceLayer.findGame();
+
+
     }
 
     @Test
     public void findGame() {
+
     }
 
     @Test
@@ -76,9 +90,17 @@ public class ServiceLayerTest {
         game.setDescription("Its basically harry potter but in space");
         game.setQuantity(4);
         game.setEsrbRating("not suitable for children");
+        Games game1= new Games();
+        game1.setId(1);
+        game1.setTitle("Star Wars");
+        game1.setPrice(50);
+        game1.setStudio("Lucas Films");
+        game1.setDescription("Its basically harry potter but in space");
+        game1.setQuantity(4);
+        game1.setEsrbRating("not suitable for children");
         List<Games> games =new ArrayList<>();
-        //doReturn(game).when(gameRepository).save(game);
+        doReturn(game1).when(gameRepository).save(game);
         //doReturn(Optional.of(games)).when(gameRepository).findById(1);
-        doReturn(games).when(gameRepository).findAll();
+        //doReturn(games).when(gameRepository).findAll();
     }
 }
