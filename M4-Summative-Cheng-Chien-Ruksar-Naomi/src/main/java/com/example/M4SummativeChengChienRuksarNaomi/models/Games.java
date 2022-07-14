@@ -104,12 +104,12 @@ public class Games {
         if (this == o) return true;
         if (!(o instanceof Games)) return false;
         Games games = (Games) o;
-        return Double.compare(games.getDecimal(), getDecimal()) == 0 && getQuantity() == games.getQuantity() && Objects.equals(getId(), games.getId()) && Objects.equals(getEsrbRating(), games.getEsrbRating()) && Objects.equals(getTitle(), games.getTitle()) && Objects.equals(getDescription(), games.getDescription()) && Objects.equals(getStudio(), games.getStudio());
+        return Double.compare(games.getPrice(), getPrice()) == 0 && getQuantity() == games.getQuantity() && Objects.equals(getId(), games.getId()) && Objects.equals(getEsrbRating(), games.getEsrbRating()) && Objects.equals(getTitle(), games.getTitle()) && Objects.equals(getDescription(), games.getDescription()) && Objects.equals(getStudio(), games.getStudio());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getEsrbRating(), getTitle(), getDescription(), getDecimal(), getStudio(), getQuantity());
+        return Objects.hash(getId(), getEsrbRating(), getTitle(), getDescription(), getPrice(), getStudio(), getQuantity());
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Games {
                 ", esrbRating='" + esrbRating + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", decimal=" + decimal +
+                ", price=" + decimal +
                 ", studio='" + studio + '\'' +
                 ", quantity=" + quantity +
                 '}';
