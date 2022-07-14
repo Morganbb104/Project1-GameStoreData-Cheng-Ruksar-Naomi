@@ -16,7 +16,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doReturn;
 
 
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class ServiceLayerTest {
     ServiceLayer serviceLayer;
@@ -28,6 +30,10 @@ public class ServiceLayerTest {
     @Before
     public void setUp() throws Exception{
         setUpGameRepositoryMock();
+        setUpConsoleRepositoryMock();
+        setUpTshirtRepositoryMock();
+        setUpProcessingFeeRepositoryMock();
+        setUpSalesTaxRateRepositoryMock();
         serviceLayer= new ServiceLayer(gameRepository, consoleRepository,
                  tshirtRepository, processingFeeRepository, salesTaxRateRepository);
         Games game= new Games();
@@ -72,10 +78,7 @@ public class ServiceLayerTest {
         expectedGameViewModel.setQuantity(4);
         expectedGameViewModel.setEsrbRating("not suitable for children");
 
-        expectedGameViewModel.getId();
-
-
-
+     expectedGameViewModel=serviceLayer.findGame(expectedGameViewModel.getId());
 
 
     }
@@ -97,7 +100,9 @@ public class ServiceLayerTest {
     @Test
     public void removeGame() {
     }
+
     private void setUpGameRepositoryMock() {
+        gameRepository = mock(GameRepository.class);
         Games game= new Games();
 
         game.setTitle("Star Wars");
@@ -106,6 +111,7 @@ public class ServiceLayerTest {
         game.setDescription("Its basically harry potter but in space");
         game.setQuantity(4);
         game.setEsrbRating("not suitable for children");
+
         Games game1= new Games();
         game1.setId(1);
         game1.setTitle("Star Wars");
@@ -114,9 +120,17 @@ public class ServiceLayerTest {
         game1.setDescription("Its basically harry potter but in space");
         game1.setQuantity(4);
         game1.setEsrbRating("not suitable for children");
+
         List<Games> games =new ArrayList<>();
+        games.add(game1);
         doReturn(game1).when(gameRepository).save(game);
-        //doReturn(Optional.of(games)).when(gameRepository).findById(1);
-        //doReturn(games).when(gameRepository).findAll();
+        doReturn(Optional.of(game)).when(gameRepository).findById(1);
+        doReturn(games).when(gameRepository).findAll();
     }
+    private void setUpConsoleRepositoryMock() {}
+    private void setUpProcessingFeeRepositoryMock() {}
+    private void setUpTshirtRepositoryMock() {}
+    private void setUpSalesTaxRateRepositoryMock() {}
+
+
 }
