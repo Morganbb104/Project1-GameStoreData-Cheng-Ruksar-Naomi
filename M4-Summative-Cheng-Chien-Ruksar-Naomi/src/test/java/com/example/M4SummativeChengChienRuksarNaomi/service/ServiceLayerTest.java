@@ -6,6 +6,7 @@ import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.GameViewModel;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class ServiceLayerTest {
         Games game= new Games();
 
         game.setTitle("Star Wars");
-        game.setPrice(50);
+        game.setPrice(BigDecimal.valueOf(50));
         game.setStudio("Lucas Films");
         game.setDescription("Its basically harry potter but in space");
         game.setQuantity(4);
@@ -49,7 +50,7 @@ public class ServiceLayerTest {
     public void shouldSaveGame() {
         GameViewModel game =new GameViewModel();
         game.setTitle("Star Wars");
-        game.setPrice(50);
+        game.setPrice(BigDecimal.valueOf(50));
         game.setStudio("Lucas Films");
         game.setDescription("Its basically harry potter but in space");
         game.setQuantity(4);
@@ -65,7 +66,7 @@ public class ServiceLayerTest {
         GameViewModel expectedGameViewModel =new GameViewModel();
         expectedGameViewModel.setId(1);
         expectedGameViewModel.setTitle("Star Wars");
-        expectedGameViewModel.setPrice(50);
+        expectedGameViewModel.setPrice(BigDecimal.valueOf(50));
         expectedGameViewModel.setStudio("Lucas Films");
         expectedGameViewModel.setDescription("Its basically harry potter but in space");
         expectedGameViewModel.setQuantity(4);
@@ -100,7 +101,7 @@ public class ServiceLayerTest {
         Games game= new Games();
 
         game.setTitle("Star Wars");
-        game.setPrice(50);
+        game.setPrice(BigDecimal.valueOf(50));
         game.setStudio("Lucas Films");
         game.setDescription("Its basically harry potter but in space");
         game.setQuantity(4);
@@ -108,7 +109,7 @@ public class ServiceLayerTest {
         Games game1= new Games();
         game1.setId(1);
         game1.setTitle("Star Wars");
-        game1.setPrice(50);
+        game1.setPrice(BigDecimal.valueOf(50));
         game1.setStudio("Lucas Films");
         game1.setDescription("Its basically harry potter but in space");
         game1.setQuantity(4);

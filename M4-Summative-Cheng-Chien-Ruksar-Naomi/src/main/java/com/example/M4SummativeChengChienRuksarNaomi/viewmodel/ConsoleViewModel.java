@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ConsoleViewModel {
@@ -32,11 +33,11 @@ public class ConsoleViewModel {
     private String processor;
 
     @NotNull
-    private double price;
+    private BigDecimal price;
     @NotNull
     private int quantity;
 
-    public ConsoleViewModel(Integer id, String model, String manufacturer, String memoryAmount, String processor, double price, int quantity) {
+    public ConsoleViewModel(Integer id, String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
         this.id = id;
         this.model = model;
         this.manufacturer = manufacturer;
@@ -89,11 +90,11 @@ public class ConsoleViewModel {
         this.processor = processor;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -110,7 +111,7 @@ public class ConsoleViewModel {
         if (this == o) return true;
         if (!(o instanceof Console)) return false;
         Console console = (Console) o;
-        return Double.compare(console.getPrice(), getPrice()) == 0 && getQuantity() == console.getQuantity() && Objects.equals(getId(), console.getId()) && Objects.equals(getModel(), console.getModel()) && Objects.equals(getManufacturer(), console.getManufacturer()) && Objects.equals(getMemoryAmount(), console.getMemoryAmount()) && Objects.equals(getProcessor(), console.getProcessor());
+        return getQuantity() == console.getQuantity() && Objects.equals(getId(), console.getId()) && Objects.equals(getModel(), console.getModel()) && Objects.equals(getManufacturer(), console.getManufacturer()) && Objects.equals(getMemoryAmount(), console.getMemoryAmount()) && Objects.equals(getProcessor(), console.getProcessor()) && Objects.equals(getPrice(), console.getPrice());
     }
 
     @Override

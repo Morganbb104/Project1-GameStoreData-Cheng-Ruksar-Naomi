@@ -5,6 +5,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -24,13 +25,13 @@ public class Games {
     @NotNull
     private String description;
     @NotNull
-    private double price;
+    private BigDecimal price;
     @NotNull
     private String studio;
     @NotNull
     private int quantity;
 
-    public Games(Integer id, String esrbRating, String title, String description, double price, String studio, int quantity) {
+    public Games(Integer id, String esrbRating, String title, String description, BigDecimal price, String studio, int quantity) {
         this.id = id;
         this.esrbRating = esrbRating;
         this.title = title;
@@ -75,11 +76,11 @@ public class Games {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -102,14 +103,14 @@ public class Games {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Games)) return false;
         Games games = (Games) o;
-        return Double.compare(games.price, price) == 0 && quantity == games.quantity && Objects.equals(id, games.id) && Objects.equals(esrbRating, games.esrbRating) && Objects.equals(title, games.title) && Objects.equals(description, games.description) && Objects.equals(studio, games.studio);
+        return getQuantity() == games.getQuantity() && Objects.equals(getId(), games.getId()) && Objects.equals(getEsrbRating(), games.getEsrbRating()) && Objects.equals(getTitle(), games.getTitle()) && Objects.equals(getDescription(), games.getDescription()) && Objects.equals(getPrice(), games.getPrice()) && Objects.equals(getStudio(), games.getStudio());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, esrbRating, title, description, price, studio, quantity);
+        return Objects.hash(getId(), getEsrbRating(), getTitle(), getDescription(), getPrice(), getStudio(), getQuantity());
     }
 
     @Override

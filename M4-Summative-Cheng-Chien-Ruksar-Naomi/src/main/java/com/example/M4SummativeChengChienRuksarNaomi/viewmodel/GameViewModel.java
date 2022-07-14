@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class GameViewModel {
@@ -24,7 +25,7 @@ public class GameViewModel {
     @NotNull
     private String description;
     @NotNull
-    private double price;
+    private BigDecimal price;
     @NotNull
     private String studio;
     @NotNull
@@ -39,7 +40,7 @@ public class GameViewModel {
         this.esrbRating = esrbRating;
         this.title = title;
         this.description = description;
-        this.price = price;
+        this.price = BigDecimal.valueOf(price);
         this.studio = studio;
         this.quantity = quantity;
     }
@@ -76,11 +77,11 @@ public class GameViewModel {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -103,9 +104,9 @@ public class GameViewModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GameViewModel that = (GameViewModel) o;
-        return Double.compare(that.price, price) == 0 && quantity == that.quantity && Objects.equals(id, that.id) && Objects.equals(esrbRating, that.esrbRating) && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(studio, that.studio);
+        if (!(o instanceof Games)) return false;
+        Games games = (Games) o;
+        return getQuantity() == games.getQuantity() && Objects.equals(getId(), games.getId()) && Objects.equals(getEsrbRating(), games.getEsrbRating()) && Objects.equals(getTitle(), games.getTitle()) && Objects.equals(getDescription(), games.getDescription()) && Objects.equals(getPrice(), games.getPrice()) && Objects.equals(getStudio(), games.getStudio());
     }
 
     @Override

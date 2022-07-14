@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -36,7 +37,7 @@ public class ConsoleRepositoryTest {
         console.setManufacturer("sony");
         console.setMemoryAmount("5GB");
         console.setQuantity(6);
-        console.setPrice(250);
+        console.setPrice(BigDecimal.valueOf(250));
         console.setProcessor("intel 8th Gen");
         console.setModel("model-1");
 
