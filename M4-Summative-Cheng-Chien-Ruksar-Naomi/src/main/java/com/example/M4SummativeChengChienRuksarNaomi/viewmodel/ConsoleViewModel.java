@@ -131,4 +131,6 @@ public class ConsoleViewModel {
                 ", quantity=" + quantity +
                 '}';
     }
+
+
 }

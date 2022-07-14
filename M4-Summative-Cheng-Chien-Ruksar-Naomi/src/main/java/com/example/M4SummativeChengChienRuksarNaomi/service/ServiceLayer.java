@@ -1,13 +1,11 @@
 package com.example.M4SummativeChengChienRuksarNaomi.service;
 
-import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
-import com.example.M4SummativeChengChienRuksarNaomi.models.Games;
-import com.example.M4SummativeChengChienRuksarNaomi.models.Invoice;
-import com.example.M4SummativeChengChienRuksarNaomi.models.SalesTaxRate;
+import com.example.M4SummativeChengChienRuksarNaomi.models.*;
 import com.example.M4SummativeChengChienRuksarNaomi.repository.*;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ConsoleViewModel;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.GameViewModel;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.InvoiceViewModel;
+import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.TshirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -233,7 +231,7 @@ public class ServiceLayer {
 //    }
 
 
-
+    // Console service layer
 
     @Transactional
     public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
@@ -321,6 +319,100 @@ public class ServiceLayer {
 
 
         consoleRepository.deleteById(id);
+
+    }
+
+    //T-shirt service layer
+
+    @Transactional
+    public TshirtViewModel saveTshirt(TshirtViewModel viewModel){
+        Tshirt tshirt = new Tshirt();
+        tshirt.setId(viewModel.getId());
+        tshirt.setColor(viewModel.getColor());
+        tshirt.setSize(viewModel.getSize());
+        tshirt.setPrice(viewModel.getPrice());
+        tshirt.setQuantity(viewModel.getQuantity());
+        tshirt.setDescription(viewModel.getDescription());
+
+        tshirt = tshirtRepository.save(tshirt);
+
+        viewModel.setId(tshirt.getId());
+
+
+
+        return viewModel;
+
+
+
+    }
+
+    public TshirtViewModel findTshirtById(int id) {
+
+        Optional<Tshirt> tshirt = tshirtRepository.findById(id);
+
+        return tshirt.isPresent() ? buildTshirtViewModel(tshirt.get()) : null ;
+        //buildTshirtViewModel(tshirt.get()) : null;
+    }
+
+    private TshirtViewModel buildTshirtViewModel(Tshirt tshirt) {
+
+
+        Optional<Tshirt> tshirt1 = tshirtRepository.findById(tshirt.getId());
+
+
+        TshirtViewModel tshirtViewModel = new TshirtViewModel();
+
+        tshirtViewModel.setId(tshirt.getId());
+        tshirtViewModel.setColor(tshirt.getColor());
+        tshirtViewModel.setPrice(tshirt.getPrice());
+        tshirtViewModel.setSize(tshirt.getSize());
+        tshirtViewModel.setQuantity(tshirt.getQuantity());
+        tshirtViewModel.setDescription(tshirt.getDescription());
+
+
+        return tshirtViewModel;
+    }
+
+
+    public List<TshirtViewModel> findAllTshirts() {
+
+        List<Tshirt> tshirtList = tshirtRepository.findAll();
+
+        List<TshirtViewModel> tvmList = new ArrayList<>();
+
+        for (Tshirt tshirt : tshirtList) {
+            TshirtViewModel tvm = buildTshirtViewModel(tshirt);
+            tvmList.add(tvm);
+        }
+
+        return tvmList;
+    }
+
+
+    @Transactional
+    public void updateTshirt(TshirtViewModel viewModel) {
+
+
+
+        Tshirt tshirt = new Tshirt();
+        tshirt.setId(viewModel.getId());
+        tshirt.setPrice(viewModel.getPrice());
+        tshirt.setColor(viewModel.getColor());
+        tshirt.setSize(viewModel.getSize());
+        tshirt.setDescription(viewModel.getDescription());
+        tshirt.setQuantity(viewModel.getQuantity());
+
+
+        tshirtRepository.save(tshirt);
+
+
+    }
+
+    @Transactional
+    public void removeTshirt(int id) {
+
+
+        tshirtRepository.deleteById(id);
 
     }
 
