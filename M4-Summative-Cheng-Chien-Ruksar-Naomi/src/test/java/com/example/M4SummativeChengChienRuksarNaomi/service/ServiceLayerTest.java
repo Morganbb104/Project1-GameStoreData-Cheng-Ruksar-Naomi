@@ -27,6 +27,8 @@ public class ServiceLayerTest {
     ProcessingFeeRepository processingFeeRepository;
     SalesTaxRateRepository salesTaxRateRepository;
     TshirtRepository tshirtRepository;
+
+    InvoiceRepository invoiceRepository;
     @Before
     public void setUp() throws Exception{
         setUpGameRepositoryMock();
@@ -35,7 +37,7 @@ public class ServiceLayerTest {
         setUpProcessingFeeRepositoryMock();
         setUpSalesTaxRateRepositoryMock();
         serviceLayer= new ServiceLayer(gameRepository, consoleRepository,
-                 tshirtRepository, processingFeeRepository, salesTaxRateRepository);
+                 tshirtRepository, processingFeeRepository, salesTaxRateRepository,invoiceRepository);
         Games game= new Games();
 
         game.setTitle("Star Wars");
@@ -62,13 +64,13 @@ public class ServiceLayerTest {
         game.setQuantity(4);
         game.setEsrbRating("not suitable for children");
         game =serviceLayer.saveGame(game);
-        //GameViewModel gvm= serviceLayer.findGame();
+
 
 
     }
 
     @Test
-    public void findGame() {
+    public void shouldFindGame() {
         GameViewModel expectedGameViewModel =new GameViewModel();
         expectedGameViewModel.setId(1);
         expectedGameViewModel.setTitle("Star Wars");
@@ -84,7 +86,7 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findAllGames() {
+    public void shouldFindAllGames() {
         //Act
         List<GameViewModel> actualResult =serviceLayer.findAllGames();
 
@@ -95,10 +97,29 @@ public class ServiceLayerTest {
 
     @Test
     public void updateGame() {
+        GameViewModel expectedGameViewModel =new GameViewModel();
+        expectedGameViewModel.setId(1);
+        expectedGameViewModel.setTitle("Star Wars");
+        expectedGameViewModel.setPrice(BigDecimal.valueOf(50));
+        expectedGameViewModel.setStudio("Lucas Films");
+        expectedGameViewModel.setDescription("Its basically harry potter but in space");
+        expectedGameViewModel.setQuantity(4);
+        expectedGameViewModel.setEsrbRating("not suitable for children");
+        expectedGameViewModel =serviceLayer.saveGame(expectedGameViewModel);
+
     }
 
     @Test
     public void removeGame() {
+        GameViewModel expectedGameViewModel =new GameViewModel();
+        expectedGameViewModel.setId(1);
+        expectedGameViewModel.setTitle("Star Wars");
+        expectedGameViewModel.setPrice(BigDecimal.valueOf(50));
+        expectedGameViewModel.setStudio("Lucas Films");
+        expectedGameViewModel.setDescription("Its basically harry potter but in space");
+        expectedGameViewModel.setQuantity(4);
+        expectedGameViewModel.setEsrbRating("not suitable for children");
+        serviceLayer.removeGame(expectedGameViewModel.getId());
     }
 
     private void setUpGameRepositoryMock() {
