@@ -462,41 +462,41 @@ public class ServiceLayer {
 
     //ProcessingFee
 // Create a new processing fee
-//    @Transactional //Persist processingFee
-//    public ProcessingFeeViewModel saveProcessingFee(ProcessingFeeViewModel viewModel){
-//
-//        // Persist processingFee
-//        ProcessingFee processingFee = new ProcessingFee();
-//        processingFee.setProductType(viewModel.getProductType());
-//        processingFee.setFee(viewModel.getFee());
-//        processingFee=processingFeeRepository.save(processingFee);
-//
-//        viewModel.setProductType(processingFee.getProductType());
-//        return viewModel;
-//    }
-//
-//    //Get ProcessingFee by id->"productType"
+    @Transactional //Persist processingFee
+    public ProcessingFeeViewModel saveProcessingFee(ProcessingFeeViewModel viewModel){
+
+        // Persist processingFee
+        ProcessingFee processingFee = new ProcessingFee();
+        processingFee.setProductType(viewModel.getProductType());
+        processingFee.setFee(viewModel.getFee());
+        processingFee=processingFeeRepository.save(processingFee);
+
+        viewModel.setProductType(processingFee.getProductType());
+        return viewModel;
+    }
+
+    //Get ProcessingFee by id->"productType"
 //    public ProcessingFee findProcessingFee(String productType){
 //
 //        // Get the game object first
-//        Optional<ProcessingFee> processingFee = processingFeeRepository.(productType);
+//        Optional<ProcessingFee> processingFee = processingFeeRepository.findById(productType);
 //
 //        return processingFee.isPresent() ? processingFee.get() : null;
 //    }
 //
 //    //Create new sales tax
-//    @Transactional
-//    public SalesTaxRate saveSalesTaxRate(SalesTaxRateViewModel viewModel){
-//
-//        // Persist sales tax
-//        SalesTaxRate salesTaxRate = new SalesTaxRate();
-//        salesTaxRate.setState(salesTaxRate.getState());
-//        salesTaxRate.setRate(salesTaxRate.getRate());
-//        salesTaxRate=salesTaxRepository.save(salesTaxRate);
-//
-//        viewModel.setState(salesTaxRate.getState());
-//        return salesTaxRate;
-//    }
+    @Transactional
+    public SalesTaxRate saveSalesTaxRate(SalesTaxRateViewModel viewModel){
+
+        // Persist sales tax
+        SalesTaxRate salesTaxRate = new SalesTaxRate();
+        salesTaxRate.setState(salesTaxRate.getState());
+        salesTaxRate.setRate(salesTaxRate.getRate());
+        salesTaxRate=salesTaxRateRepository.save(salesTaxRate);
+
+        viewModel.setState(salesTaxRate.getState());
+        return salesTaxRate;
+    }
 
 
 }

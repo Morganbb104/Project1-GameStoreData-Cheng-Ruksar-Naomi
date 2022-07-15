@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class SalesTaxRateViewModel {
+public class SalesTaxRateViewModel extends InvoiceViewModel {
 
     @NotNull
 

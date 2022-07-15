@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,7 +14,7 @@ import java.util.Objects;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "sales_tax_rate")
-public class SalesTaxRate {
+public class SalesTaxRate extends Invoice {
 
     @NotNull
     @Size(min = 2, max = 2)

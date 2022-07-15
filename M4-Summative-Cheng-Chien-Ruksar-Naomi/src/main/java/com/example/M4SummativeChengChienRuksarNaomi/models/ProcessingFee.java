@@ -9,10 +9,9 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "processing_fee")
-public class ProcessingFee {
+public class ProcessingFee extends Invoice {
 
     @NotNull
     @Column(name = "product_type")
