@@ -10,7 +10,7 @@ import java.util.Objects;
 public class ProcessingFeeViewModel {
 
     @NotNull
-    @Column(name = "product_type")
+
     private String productType;
 
     private BigDecimal fee;

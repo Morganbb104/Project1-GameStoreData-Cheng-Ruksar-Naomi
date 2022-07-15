@@ -12,12 +12,10 @@ import java.util.Objects;
 
 public class GameViewModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "game_id")
+
     @NotNull
     private Integer id;
-    @Column(name = "esrb_rating")
+
     @NotNull
     private String esrbRating;
     @NotNull

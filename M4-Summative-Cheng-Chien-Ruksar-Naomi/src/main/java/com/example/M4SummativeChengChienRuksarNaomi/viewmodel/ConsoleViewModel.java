@@ -12,9 +12,7 @@ import java.util.Objects;
 
 public class ConsoleViewModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "console_id")
+
     @NotNull
     private Integer id;
 
@@ -25,7 +23,7 @@ public class ConsoleViewModel {
     private String manufacturer;
 
 
-    @Column(name = "memory_amount")
+
     @NotNull
     private String memoryAmount;
 

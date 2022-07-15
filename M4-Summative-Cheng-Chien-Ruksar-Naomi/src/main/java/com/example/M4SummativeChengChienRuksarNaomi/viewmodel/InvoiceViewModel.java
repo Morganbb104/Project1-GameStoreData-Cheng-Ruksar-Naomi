@@ -12,9 +12,7 @@ import java.util.Objects;
 
 public class InvoiceViewModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "invoice_id")
+
     @NotNull
     private Integer id;
 
@@ -31,19 +29,19 @@ public class InvoiceViewModel {
     private String state;
 
     @NotNull
-    @Column(name = "zip_code")
+
     private String zipcode;
 
     @NotNull
-    @Column(name = "item_type")
+
     private String itemType;
 
     @NotNull
-    @Column(name = "item_id")
+
     private int itemId;
 
     @NotNull
-    @Column(name = "unit_price")
+
     private BigDecimal unitPrice;
 
     @NotNull

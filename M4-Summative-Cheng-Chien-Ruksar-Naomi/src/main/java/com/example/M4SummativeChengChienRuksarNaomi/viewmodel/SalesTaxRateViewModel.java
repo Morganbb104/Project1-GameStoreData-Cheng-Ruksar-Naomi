@@ -10,7 +10,7 @@ import java.util.Objects;
 public class SalesTaxRateViewModel {
 
     @NotNull
-    @Size(min = 2, max = 2)
+
     private String state;
 
     @NotNull

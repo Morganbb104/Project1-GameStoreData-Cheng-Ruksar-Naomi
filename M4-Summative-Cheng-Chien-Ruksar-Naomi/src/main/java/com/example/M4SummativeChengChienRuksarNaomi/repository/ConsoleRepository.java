@@ -11,16 +11,8 @@ import java.util.List;
 @Repository
 public interface ConsoleRepository extends JpaRepository<Console, Integer> {
 
-    List<Games> findByManufacturer(String manufacturer);
+    List<Console> findByManufacturer(String manufacturer);
 
 
-    List<ConsoleViewModel> findAllConsoles();
 
-    void updateConsole(ConsoleViewModel consoleViewModel);
-
-    ConsoleViewModel findConsoleById(int id);
-
-    ConsoleViewModel saveConsole(ConsoleViewModel consoleviewModel);
-
-    void removeConsole(int id);
 }

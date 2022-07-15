@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "sales_tax_rate")
 public class SalesTaxRate {
