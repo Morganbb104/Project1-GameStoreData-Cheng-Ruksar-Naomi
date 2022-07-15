@@ -15,22 +15,15 @@ public class Tshirt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "t_shirt_id")
-    @NotNull
+
     private Integer id;
-
-    @NotNull
     private String size;
-
-    @NotNull
     private String color;
 
-    @NotNull
     private String description;
 
-    @NotNull
     private BigDecimal price;
 
-    @NotNull
     private int quantity;
 
     public Tshirt(Integer id, String size, String color, String description, BigDecimal price, int quantity) {

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProcessingFeeRepository extends JpaRepository<Invoice, Integer> {
+
 }

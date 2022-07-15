@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,6 @@ import java.util.Optional;
 public class ServiceLayer {
 
     private GameRepository gameRepository;
-
 
     private ConsoleRepository consoleRepository;
 
@@ -377,7 +377,8 @@ public class ServiceLayer {
         tshirt.setPrice(viewModel.getPrice());
         tshirt.setQuantity(viewModel.getQuantity());
         tshirt.setDescription(viewModel.getDescription());
-
+        BigDecimal priceFormatter = tshirt.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP);
+        tshirt.setPrice(priceFormatter);
         tshirt = tshirtRepository.save(tshirt);
 
         viewModel.setId(tshirt.getId());
@@ -401,7 +402,7 @@ public class ServiceLayer {
     private TshirtViewModel buildTshirtViewModel(Tshirt tshirt) {
 
 
-        Optional<Tshirt> tshirt1 = tshirtRepository.findById(tshirt.getId());
+        //Optional<Tshirt> tshirt1 = tshirtRepository.findById(tshirt.getId());
 
 
         TshirtViewModel tshirtViewModel = new TshirtViewModel();
@@ -412,6 +413,8 @@ public class ServiceLayer {
         tshirtViewModel.setSize(tshirt.getSize());
         tshirtViewModel.setQuantity(tshirt.getQuantity());
         tshirtViewModel.setDescription(tshirt.getDescription());
+        BigDecimal priceFormatter = tshirtViewModel.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP);
+        tshirtViewModel.setPrice(priceFormatter);
 
 
         return tshirtViewModel;

@@ -15,47 +15,46 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invoice_id")
-    @NotNull
+
     private Integer id;
 
-    @NotNull
+
     private String name;
 
-    @NotNull
+
     private String street;
 
-    @NotNull
+
     private String city;
 
-    @NotNull
+
     private String state;
 
-    @NotNull
-    @Column(name = "zip_code")
+
     private String zipcode;
 
-    @NotNull
+
     @Column(name = "item_type")
     private String itemType;
 
-    @NotNull
+
     @Column(name = "item_id")
     private int itemId;
 
-    @NotNull
+
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
 
-    @NotNull
+
     private int quantity;
 
-    @NotNull
+
     private BigDecimal subtotal;
 
-    @NotNull
+
     private BigDecimal tax;
 
-    @NotNull
+
     @Column(name = "processing_fee")
     private BigDecimal processingFee;
 

@@ -59,4 +59,8 @@ public class ConsoleRepositoryTest {
 
 
     }
+
+    @org.junit.jupiter.api.Test
+    void findByManufacturer() {
+    }
 }
