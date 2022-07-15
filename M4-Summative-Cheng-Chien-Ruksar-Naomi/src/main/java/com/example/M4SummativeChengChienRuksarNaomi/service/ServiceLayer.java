@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -166,13 +167,32 @@ public class ServiceLayer {
 
         return viewModel;
 
-        // Quantity can not be zero
+        // Order quantity must be greater than zero.
 //        if(invoice.getQuantity() == 0){
 //            throw new IllegalArgumentException("Your Quantity can not be null");
-//        } else if (invoice.getQuantity() > 10) {
-//            throw
 //        }
 
+//        public SalesTaxRateViewModel salesTaxRateViewModel(String ){
+//            List<SalesTaxRateViewModel>salesTaxRateViewModelList = new ArrayList<>();
+//
+//            BigDecimal rate = BigDecimal.valueOf(0.00);
+//            switch (String ){
+//                case "AL":
+//                   return 0.05
+//                   break;
+//
+//            }
+//        }
+
+
+
+
+
+//Order quantity must be less than or equal to the number of items available in inventory.
+//The processing fee is applied only once per order, regardless of the number of items in the order, unless the number of items in the order is greater than 10, in which case an additional processing fee of $15.49 is applied to the order.
+//The order must contain a valid state code.
+//The order-processing logic must properly update the quantity available for the item in the order
+//Sales tax applies only to the cost of the items.
 
         //get Quantity
         //check the itemType,
@@ -458,44 +478,6 @@ public class ServiceLayer {
 
         tshirtRepository.deleteById(id);
 
-    }
-
-    //ProcessingFee
-// Create a new processing fee
-    @Transactional //Persist processingFee
-    public ProcessingFeeViewModel saveProcessingFee(ProcessingFeeViewModel viewModel){
-
-        // Persist processingFee
-        ProcessingFee processingFee = new ProcessingFee();
-        processingFee.setProductType(viewModel.getProductType());
-        processingFee.setFee(viewModel.getFee());
-        processingFee=processingFeeRepository.save(processingFee);
-
-        viewModel.setProductType(processingFee.getProductType());
-        return viewModel;
-    }
-
-    //Get ProcessingFee by id->"productType"
-//    public ProcessingFee findProcessingFee(String productType){
-//
-//        // Get the game object first
-//        Optional<ProcessingFee> processingFee = processingFeeRepository.findById(productType);
-//
-//        return processingFee.isPresent() ? processingFee.get() : null;
-//    }
-//
-//    //Create new sales tax
-    @Transactional
-    public SalesTaxRate saveSalesTaxRate(SalesTaxRateViewModel viewModel){
-
-        // Persist sales tax
-        SalesTaxRate salesTaxRate = new SalesTaxRate();
-        salesTaxRate.setState(salesTaxRate.getState());
-        salesTaxRate.setRate(salesTaxRate.getRate());
-        salesTaxRate=salesTaxRateRepository.save(salesTaxRate);
-
-        viewModel.setState(salesTaxRate.getState());
-        return salesTaxRate;
     }
 
 

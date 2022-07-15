@@ -25,6 +25,24 @@ public class SalesTaxRateViewModel extends InvoiceViewModel {
     }
 
     @Override
+    public String getState() {
+        return state;
+    }
+
+    @Override
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SalesTaxRate)) return false;
