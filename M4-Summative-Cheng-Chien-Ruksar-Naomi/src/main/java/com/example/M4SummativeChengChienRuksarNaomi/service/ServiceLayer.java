@@ -15,6 +15,7 @@ import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.NoTransactionException;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -145,7 +146,7 @@ public class ServiceLayer {
 
         // Persist invoice
         Invoice invoice = new Invoice();
-        invoice.setId(viewModel.getId());
+//        invoice.setId(viewModel.getId());
 
         invoice.setName(viewModel.getName());
         invoice.setStreet(viewModel.getStreet());
@@ -156,38 +157,63 @@ public class ServiceLayer {
         invoice.setItemId(viewModel.getItemId());
         invoice.setUnitPrice(viewModel.getUnitPrice());
         invoice.setQuantity(viewModel.getQuantity());
-        invoice.setSubtotal(viewModel.getSubtotal());// Don't exist
-        invoice.setTax(viewModel.getTax());// Don't exist
-        invoice.setProcessingFee(viewModel.getProcessingFee());// Don't exist
-        invoice.setTotal(viewModel.getTotal());
+//        invoice.setSubtotal(viewModel.getSubtotal());// Don't exist
+//        invoice.setTax(viewModel.getTax());// Don't exist
+//        invoice.setProcessingFee(viewModel.getProcessingFee());// Don't exist
+//        invoice.setTotal(viewModel.getTotal());
 
         invoice = invoiceRepository.save(invoice);
         viewModel.setId(invoice.getId());
 
-        return viewModel;
 
         // Order quantity must be greater than zero.
-//        if(invoice.getQuantity() == 0){
-//            throw new IllegalArgumentException("Your Quantity can not be null");
-//        }
+        if (invoice.getQuantity() == 0) {
+            throw new IllegalArgumentException("Your Quantity can not be null");
+        }
 
-//        public SalesTaxRateViewModel salesTaxRateViewModel(String ){
-//            List<SalesTaxRateViewModel>salesTaxRateViewModelList = new ArrayList<>();
-//
-//            BigDecimal rate = BigDecimal.valueOf(0.00);
-//            switch (String ){
-//                case "AL":
-//                   return 0.05
-//                   break;
-//
-//            }
-//        }
+        //getting state
+//        if(invoice.getState().equals(invoice.getState(viewModel.getState(String )))){}
+
+        //Order quantity must be less than or equal to the number of items available in inventory.
+        if (invoice.getItemType().equals("game")) {
+            if (invoice.getQuantity() <= findGame(invoice.getItemId()).getQuantity()) {
+                GameViewModel game = findGame(invoice.getItemId());// got game items' ID
+                game.setQuantity(game.getQuantity() - invoice.getQuantity());// checking the supply for invoice
+                invoice.setUnitPrice(game.getPrice());//setting unit price from game
+                invoice.setUnitPrice(invoice.getUnitPrice());// setting the unit price by getting the unit price from invoice
+
+            } else {// go this way if there's no enough items for invoice
+                throw new NoTransactionException("There are not enough game items for your order");
+            }
+        } else if (invoice.getItemType().equals("console")) {
+            if (invoice.getQuantity() <= findConsoleById(invoice.getItemId()).getQuantity()) {
+                ConsoleViewModel console = findConsoleById(invoice.getItemId());
+                // checking the supply for invoice
+                console.setQuantity(console.getQuantity() - invoice.getQuantity());
+                //set price
+                invoice.setUnitPrice(console.getPrice());
+                invoice.setUnitPrice(invoice.getUnitPrice());
+            } else {
+                throw new NoTransactionException("There are not enough game items for your order");
+            }
+        } else if (invoice.getItemType().equals("tshirt")) {
+            if (invoice.getQuantity() <= findTshirtById(invoice.getItemId()).getQuantity()) {
+                TshirtViewModel tshirt = findTshirtById(invoice.getItemId());
+                // checking the supply for invoice
+                tshirt.setQuantity(tshirt.getQuantity() - invoice.getQuantity());
+                //set price
+                invoice.setUnitPrice(tshirt.getPrice());
+                invoice.setUnitPrice(invoice.getUnitPrice());
+            } else {
+                throw new NoTransactionException("There are not enough tshirt items for your order");
+            }
 
 
+        }else{
+            throw new IllegalArgumentException("no matching product type includes 'game' 'console' 'tshirt' ");
+        }
 
 
-
-//Order quantity must be less than or equal to the number of items available in inventory.
 //The processing fee is applied only once per order, regardless of the number of items in the order, unless the number of items in the order is greater than 10, in which case an additional processing fee of $15.49 is applied to the order.
 //The order must contain a valid state code.
 //The order-processing logic must properly update the quantity available for the item in the order

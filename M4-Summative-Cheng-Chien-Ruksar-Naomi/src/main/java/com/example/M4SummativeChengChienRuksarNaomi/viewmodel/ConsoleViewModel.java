@@ -1,6 +1,7 @@
 package com.example.M4SummativeChengChienRuksarNaomi.viewmodel;
 
 import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
+import com.example.M4SummativeChengChienRuksarNaomi.models.Invoice;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ConsoleViewModel {
+public class ConsoleViewModel{
 
     @NotNull
     private Integer id;
