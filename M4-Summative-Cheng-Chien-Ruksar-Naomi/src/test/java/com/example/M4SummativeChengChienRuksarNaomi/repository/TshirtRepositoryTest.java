@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -137,6 +138,18 @@ public class TshirtRepositoryTest {
 
         @Test
     public void findBySize() {
+            Tshirt tshirt = new Tshirt();
+            tshirt.setQuantity(4);
+            tshirt.setDescription("This is a tshirt");
+            tshirt.setPrice(BigDecimal.valueOf(20.00));
+            tshirt.setSize("L");
+            tshirt.setColor("Blue");
+            tshirtRepository.save(tshirt);
+
+
+            List<Tshirt> tshirt1 = tshirtRepository.findBySize(tshirt.getSize());
+
+            assertEquals(tshirt1, tshirt);
     }
 
     @Test
