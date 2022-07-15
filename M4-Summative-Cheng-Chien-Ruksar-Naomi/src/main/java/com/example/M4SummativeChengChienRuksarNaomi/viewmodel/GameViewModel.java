@@ -12,10 +12,19 @@ import java.util.Objects;
 
 public class GameViewModel {
 
+<<<<<<< Updated upstream
 
     @NotNull
     private Integer id;
 
+=======
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "game_id")
+    @NotNull
+    private Integer id;
+//    @Column(name = "esrb_rating")
+>>>>>>> Stashed changes
     @NotNull
     private String esrbRating;
     @NotNull

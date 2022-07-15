@@ -10,13 +10,7 @@ import com.example.M4SummativeChengChienRuksarNaomi.models.ProcessingFee;
 import com.example.M4SummativeChengChienRuksarNaomi.models.SalesTaxRate;
 
 import com.example.M4SummativeChengChienRuksarNaomi.repository.*;
-import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ConsoleViewModel;
-import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.GameViewModel;
-import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.InvoiceViewModel;
-
-import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.TshirtViewModel;
-
-import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ProcessingFeeViewModel;
+import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 @Component
 public class ServiceLayer {
 
@@ -162,16 +156,38 @@ public class ServiceLayer {
         invoice.setItemId(viewModel.getItemId());
         invoice.setUnitPrice(viewModel.getUnitPrice());
         invoice.setQuantity(viewModel.getQuantity());
-        invoice.setSubtotal(viewModel.getSubtotal());
-        invoice.setTax(viewModel.getTax());
-        invoice.setProcessingFee(viewModel.getProcessingFee());
+        invoice.setSubtotal(viewModel.getSubtotal());// Don't exist
+        invoice.setTax(viewModel.getTax());// Don't exist
+        invoice.setProcessingFee(viewModel.getProcessingFee());// Don't exist
         invoice.setTotal(viewModel.getTotal());
 
         invoice = invoiceRepository.save(invoice);
         viewModel.setId(invoice.getId());
 
         return viewModel;
+
+        // Quantity can not be zero
+//        if(invoice.getQuantity() == 0){
+//            throw new IllegalArgumentException("Your Quantity can not be null");
+//        } else if (invoice.getQuantity() > 10) {
+//            throw
+//        }
+
+
+        //get Quantity
+        //check the itemType,
+        //Sales tax applies only to the cost of the items.
     }
+
+    //Use a method
+    //check the itemType,
+    //check the UnitPrice,
+    //check enough Quantity form database,
+//    public void subTotal(){
+//
+//            //if ()
+//
+//    }
 
     public InvoiceViewModel findInvoice(Integer id) {
 
@@ -253,91 +269,8 @@ public class ServiceLayer {
 
     }
 
-//    @Transactional
-//    public ProcessingFeeViewModel saveProcessingFee(ProcessingFeeViewModel viewModel) {
+    //Create Operation For Processing Fee//Create Operation For Processing Fee
 
-        // Persist ProcessingFee
-//        ProcessingFee processingFee = new ProcessingFee();
-//        processingFee.setProductType(viewModel.getProductType());
-//
-//        processingFee.setProductType(viewModel.getProductType());
-//        game.setQuantity(viewModel.getQuantity());
-
-//
-//        processingFee = processingFeeRepository.save(processingFee);
-//        viewModel.setId(game.getId());
-//
-//        return viewModel;
-//    }
-//
-//    public GameViewModel findGame(Integer id) {
-//
-//        // Get the Game object first
-//        Optional<Games> game = gameRepository.findById(id);
-//
-//        return game.isPresent() ? buildGameViewModel(game.get()) : null;
-//    }
-//
-//    private GameViewModel buildGameViewModel(Games game) {
-//
-//        // Get the associated Game
-//        // Optional<Game> game = gameRepository.findById(game.getId());
-//
-//        // Assemble the GameViewModel
-//        GameViewModel gvm = new GameViewModel();
-//        gvm.setId(game.getId());
-//        gvm.setTitle(game.getTitle());
-//        gvm.setDescription(game.getDescription());
-//        gvm.setPrice(game.getPrice());
-//        gvm.setEsrbRating(game.getEsrbRating());
-//        gvm.setQuantity(game.getQuantity());
-//        gvm.setStudio(game.getStudio());
-//
-//
-//        // Return the GameViewModel
-//        return gvm;
-//    }
-//
-//    public List<GameViewModel> findAllGames() {
-//
-//        List<Games> gamesList = gameRepository.findAll();
-//
-//        List<GameViewModel> gvmList = new ArrayList<>();
-//
-//        for (Games game : gamesList) {
-//            GameViewModel gvm = buildGameViewModel(game);
-//            gvmList.add(gvm);
-//        }
-//
-//        return gvmList;
-//    }
-//
-//    @Transactional
-//    public void updateGame(GameViewModel viewModel) {
-//
-//        // Update the game information
-//        Games game= new Games();
-//        game.setId(viewModel.getId());
-//        game.setTitle(viewModel.getTitle());
-//        game.setPrice(viewModel.getPrice());
-//        game.setStudio(viewModel.getStudio());
-//        game.setDescription(viewModel.getDescription());
-//        game.setQuantity(viewModel.getQuantity());
-//        game.setEsrbRating(viewModel.getEsrbRating());
-//
-//
-//        gameRepository.save(game);
-//
-//    }
-//
-//    @Transactional
-//    public void removeGame(int id) {
-//
-//
-//        // Remove game
-//        gameRepository.deleteById(id);
-//
-//    }
 
 
     // Console service layer
@@ -527,7 +460,47 @@ public class ServiceLayer {
 
     }
 
+    //ProcessingFee
+// Create a new processing fee
+//    @Transactional //Persist processingFee
+//    public ProcessingFeeViewModel saveProcessingFee(ProcessingFeeViewModel viewModel){
+//
+//        // Persist processingFee
+//        ProcessingFee processingFee = new ProcessingFee();
+//        processingFee.setProductType(viewModel.getProductType());
+//        processingFee.setFee(viewModel.getFee());
+//        processingFee=processingFeeRepository.save(processingFee);
+//
+//        viewModel.setProductType(processingFee.getProductType());
+//        return viewModel;
+//    }
+//
+//    //Get ProcessingFee by id->"productType"
+//    public ProcessingFee findProcessingFee(String productType){
+//
+//        // Get the game object first
+//        Optional<ProcessingFee> processingFee = processingFeeRepository.(productType);
+//
+//        return processingFee.isPresent() ? processingFee.get() : null;
+//    }
+//
+//    //Create new sales tax
+//    @Transactional
+//    public SalesTaxRate saveSalesTaxRate(SalesTaxRateViewModel viewModel){
+//
+//        // Persist sales tax
+//        SalesTaxRate salesTaxRate = new SalesTaxRate();
+//        salesTaxRate.setState(salesTaxRate.getState());
+//        salesTaxRate.setRate(salesTaxRate.getRate());
+//        salesTaxRate=salesTaxRepository.save(salesTaxRate);
+//
+//        viewModel.setState(salesTaxRate.getState());
+//        return salesTaxRate;
+//    }
+
+
 }
+
 
 
 

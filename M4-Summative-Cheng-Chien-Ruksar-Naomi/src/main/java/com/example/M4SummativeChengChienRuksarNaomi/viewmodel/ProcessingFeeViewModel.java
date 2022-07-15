@@ -10,7 +10,11 @@ import java.util.Objects;
 public class ProcessingFeeViewModel {
 
     @NotNull
+<<<<<<< Updated upstream
 
+=======
+//    @Column(name = "product_type")
+>>>>>>> Stashed changes
     private String productType;
 
     private BigDecimal fee;

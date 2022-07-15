@@ -44,6 +44,7 @@ public class ProcessingFee {
         this.fee = fee;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

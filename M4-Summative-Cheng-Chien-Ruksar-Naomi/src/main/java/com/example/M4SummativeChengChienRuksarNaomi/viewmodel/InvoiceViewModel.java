@@ -12,7 +12,13 @@ import java.util.Objects;
 
 public class InvoiceViewModel {
 
+<<<<<<< Updated upstream
 
+=======
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "invoice_id")
+>>>>>>> Stashed changes
     @NotNull
     private Integer id;
 
@@ -29,6 +35,7 @@ public class InvoiceViewModel {
     private String state;
 
     @NotNull
+<<<<<<< Updated upstream
 
     private String zipcode;
 
@@ -42,6 +49,21 @@ public class InvoiceViewModel {
 
     @NotNull
 
+=======
+//    @Column(name = "zip_code")
+    private String zipcode;
+
+    @NotNull
+//    @Column(name = "item_type")
+    private String itemType;
+
+    @NotNull
+//    @Column(name = "item_id")
+    private int itemId;
+
+    @NotNull
+//    @Column(name = "unit_price")
+>>>>>>> Stashed changes
     private BigDecimal unitPrice;
 
     @NotNull
@@ -54,7 +76,7 @@ public class InvoiceViewModel {
     private BigDecimal tax;
 
     @NotNull
-    @Column(name = "processing_fee")
+//    @Column(name = "processing_fee")
     private BigDecimal processingFee;
 
     @NotNull
