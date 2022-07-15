@@ -12,13 +12,6 @@ import java.util.Objects;
 
 public class TshirtViewModel {
 
-<<<<<<< Updated upstream
-
-=======
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "t_shirt_id")
->>>>>>> Stashed changes
     @NotNull
     private Integer id;
 

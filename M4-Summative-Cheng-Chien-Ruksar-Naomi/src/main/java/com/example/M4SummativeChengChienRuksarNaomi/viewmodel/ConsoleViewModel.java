@@ -12,13 +12,6 @@ import java.util.Objects;
 
 public class ConsoleViewModel {
 
-<<<<<<< Updated upstream
-
-=======
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "console_id")
->>>>>>> Stashed changes
     @NotNull
     private Integer id;
 
@@ -29,11 +22,7 @@ public class ConsoleViewModel {
     private String manufacturer;
 
 
-<<<<<<< Updated upstream
 
-=======
-//    @Column(name = "memory_amount")
->>>>>>> Stashed changes
     @NotNull
     private String memoryAmount;
 
