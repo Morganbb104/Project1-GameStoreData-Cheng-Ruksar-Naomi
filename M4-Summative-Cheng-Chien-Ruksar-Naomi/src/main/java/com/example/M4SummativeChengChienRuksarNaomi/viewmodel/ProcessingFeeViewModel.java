@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ProcessingFeeViewModel {
+public class ProcessingFeeViewModel extends InvoiceViewModel{
 
     @NotNull
     private String productType;
