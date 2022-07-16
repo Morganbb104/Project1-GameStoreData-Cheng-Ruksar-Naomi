@@ -261,11 +261,7 @@ public class ServiceLayer {
         //get state and rate
 
 
-       invoice.setTax(invoice.getSubtotal());
-
-
-
-
+        invoice.setTax(invoice.getSubtotal());
 
 
 //The processing fee is applied only once per order, regardless of the number of items in the order, unless the number of items in the order is greater than 10, in which case an additional processing fee of $15.49 is applied to the order.
@@ -279,23 +275,21 @@ public class ServiceLayer {
         //Sales tax applies only to the cost of the items.
 
 
-    }
-
-    //get Quantity
-    //check the itemType,
+        //get Quantity
+        //check the itemType,
 
 
-
-    //Use a method
-    //check the itemType,
-    //check the UnitPrice,
-    //check enough Quantity form database,
+        //Use a method
+        //check the itemType,
+        //check the UnitPrice,
+        //check enough Quantity form database,
 //    public void subTotal(){
 //
 //            //if ()
 //
 //    }
-}
+
+    }
 
     public InvoiceViewModel findInvoice(Integer id) {
 
