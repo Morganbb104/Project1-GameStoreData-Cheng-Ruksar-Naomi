@@ -4,6 +4,7 @@ import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
 import com.example.M4SummativeChengChienRuksarNaomi.repository.ConsoleRepository;
 import com.example.M4SummativeChengChienRuksarNaomi.service.ServiceLayer;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.ConsoleViewModel;
+import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.GameViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,10 @@ public class ConsoleController {
         return serviceLayer.findConsoleById(id);
     }
 
+    @GetMapping("/game/{studio}")
+    public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable String manufacturer) {
+        return serviceLayer.findConsoleByManufacturer(manufacturer);
+    }
     @PostMapping("/consoles")
     @ResponseStatus(HttpStatus.CREATED)
     public ConsoleViewModel addConsole(@RequestBody  @Valid ConsoleViewModel consoleViewModel) {

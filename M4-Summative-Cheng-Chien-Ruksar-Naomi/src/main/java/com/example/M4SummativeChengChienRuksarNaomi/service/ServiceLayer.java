@@ -40,106 +40,145 @@ public class ServiceLayer {
     private InvoiceRepository invoiceRepository;
 
 
+    @Autowired
+    public ServiceLayer(GameRepository gameRepository, ConsoleRepository consoleRepository,
+                        TshirtRepository tshirtRepository, ProcessingFeeRepository processingFeeRepository, SalesTaxRateRepository salesTaxRateRepository, InvoiceRepository invoiceRepository) {
+        this.gameRepository = gameRepository;
+        this.consoleRepository = consoleRepository;
+        this.tshirtRepository = tshirtRepository;
+        this.processingFeeRepository = processingFeeRepository;
+        this.salesTaxRateRepository = salesTaxRateRepository;
+        this.invoiceRepository = invoiceRepository;
+    }
 
+    @Transactional
+    public GameViewModel saveGame(GameViewModel viewModel) {
 
-        @Autowired
-        public ServiceLayer(GameRepository gameRepository, ConsoleRepository consoleRepository,
-                            TshirtRepository tshirtRepository, ProcessingFeeRepository processingFeeRepository,SalesTaxRateRepository salesTaxRateRepository,InvoiceRepository invoiceRepository) {
-            this.gameRepository =gameRepository;
-            this.consoleRepository=consoleRepository;
-            this.tshirtRepository = tshirtRepository;
-            this.processingFeeRepository = processingFeeRepository;
-            this.salesTaxRateRepository=salesTaxRateRepository;
-            this.invoiceRepository = invoiceRepository;
-        }
+        // Persist Games
+        Games game = new Games();
+        game.setTitle(viewModel.getTitle());
 
-        @Transactional
-        public GameViewModel saveGame(GameViewModel viewModel) {
+        game.setPrice(viewModel.getPrice());
+        game.setQuantity(viewModel.getQuantity());
+        game.setDescription(viewModel.getDescription());
+        game.setEsrbRating(viewModel.getEsrbRating());
+        game.setStudio(viewModel.getStudio());
 
-            // Persist Games
-            Games game = new Games();
-            game.setTitle(viewModel.getTitle());
+        game = gameRepository.save(game);
+        viewModel.setId(game.getId());
 
-            game.setPrice(viewModel.getPrice());
-            game.setQuantity(viewModel.getQuantity());
-            game.setDescription(viewModel.getDescription());
-            game.setEsrbRating(viewModel.getEsrbRating());
-            game.setStudio(viewModel.getStudio());
+        return viewModel;
+    }
 
-            game = gameRepository.save(game);
-            viewModel.setId(game.getId());
+    public GameViewModel findGame(Integer id) {
 
-            return viewModel;
-        }
+        // Get the Game object first
+        Optional<Games> game = gameRepository.findById(id);
 
-        public GameViewModel findGame(Integer id) {
+        return game.isPresent() ? buildGameViewModel(game.get()) : null;
+    }
 
-            // Get the Game object first
-            Optional<Games> game = gameRepository.findById(id);
-
-            return game.isPresent() ? buildGameViewModel(game.get()) : null;
-        }
-
-        private GameViewModel buildGameViewModel(Games game) {
-
-            // Get the associated Game
-           // Optional<Game> game = gameRepository.findById(game.getId());
-
-            // Assemble the GameViewModel
-            GameViewModel gvm = new GameViewModel();
-            gvm.setId(game.getId());
-            gvm.setTitle(game.getTitle());
-            gvm.setDescription(game.getDescription());
-            gvm.setPrice(game.getPrice());
-            gvm.setEsrbRating(game.getEsrbRating());
-            gvm.setQuantity(game.getQuantity());
-            gvm.setStudio(game.getStudio());
-
-
-            // Return the GameViewModel
-            return gvm;
-        }
-
-        public List<GameViewModel> findAllGames() {
-
-            List<Games> gamesList = gameRepository.findAll();
-
-            List<GameViewModel> gvmList = new ArrayList<>();
-
-            for (Games game : gamesList) {
-                GameViewModel gvm = buildGameViewModel(game);
-                gvmList.add(gvm);
+    public List<GameViewModel> findGameByTitle(String title) {
+//
+        List<Games> gamesList = gameRepository.findByStudio(title);
+        List<GameViewModel> games = new ArrayList<>();
+        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
+        for (int i = 0; i < gamesList.size(); i++) {
+            if (games != null) {
+                games.add(buildGameViewModel(gamesList.get(i)));
             }
+        }
+        return games;
 
-            return gvmList;
+    }
+
+    public List<GameViewModel> findGameByStudio(String studio) {
+        List<Games> gamesList = gameRepository.findByStudio(studio);
+        List<GameViewModel> games = new ArrayList<>();
+        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
+        for (int i = 0; i < gamesList.size(); i++) {
+            if (games != null) {
+                games.add(buildGameViewModel(gamesList.get(i)));
+            }
+        }
+        return games;
+    }
+
+    public List<GameViewModel> findGameByEsrbRating(String esrbRating) {
+//
+        List<Games> gamesList = gameRepository.findByStudio(esrbRating);
+        List<GameViewModel> games = new ArrayList<>();
+        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
+        for (int i = 0; i < gamesList.size(); i++) {
+            if (games != null) {
+                games.add(buildGameViewModel(gamesList.get(i)));
+            }
+        }
+        return games;
+
+    }
+
+
+    private GameViewModel buildGameViewModel(Games game) {
+
+        // Get the associated Game
+        // Optional<Game> game = gameRepository.findById(game.getId());
+
+        // Assemble the GameViewModel
+        GameViewModel gvm = new GameViewModel();
+        gvm.setId(game.getId());
+        gvm.setTitle(game.getTitle());
+        gvm.setDescription(game.getDescription());
+        gvm.setPrice(game.getPrice());
+        gvm.setEsrbRating(game.getEsrbRating());
+        gvm.setQuantity(game.getQuantity());
+        gvm.setStudio(game.getStudio());
+
+
+        // Return the GameViewModel
+        return gvm;
+    }
+
+    public List<GameViewModel> findAllGames() {
+
+        List<Games> gamesList = gameRepository.findAll();
+
+        List<GameViewModel> gvmList = new ArrayList<>();
+
+        for (Games game : gamesList) {
+            GameViewModel gvm = buildGameViewModel(game);
+            gvmList.add(gvm);
         }
 
-        @Transactional
-        public void updateGame(GameViewModel viewModel) {
+        return gvmList;
+    }
 
-            // Update the game information
-            Games game= new Games();
-            game.setId(viewModel.getId());
-            game.setTitle(viewModel.getTitle());
-            game.setPrice(viewModel.getPrice());
-            game.setStudio(viewModel.getStudio());
-            game.setDescription(viewModel.getDescription());
-            game.setQuantity(viewModel.getQuantity());
-            game.setEsrbRating(viewModel.getEsrbRating());
+    @Transactional
+    public void updateGame(GameViewModel viewModel) {
 
-
-            gameRepository.save(game);
-
-        }
-
-        @Transactional
-        public void removeGame(int id) {
+        // Update the game information
+        Games game = new Games();
+        game.setId(viewModel.getId());
+        game.setTitle(viewModel.getTitle());
+        game.setPrice(viewModel.getPrice());
+        game.setStudio(viewModel.getStudio());
+        game.setDescription(viewModel.getDescription());
+        game.setQuantity(viewModel.getQuantity());
+        game.setEsrbRating(viewModel.getEsrbRating());
 
 
-            // Remove game
-            gameRepository.deleteById(id);
+        gameRepository.save(game);
 
-        }
+    }
+
+    @Transactional
+    public void removeGame(int id) {
+
+
+        // Remove game
+        gameRepository.deleteById(id);
+
+    }
 
     @Transactional
     public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel) {
@@ -209,7 +248,7 @@ public class ServiceLayer {
             }
 
 
-        }else{
+        } else {
             throw new IllegalArgumentException("no matching product type includes 'game' 'console' 'tshirt' ");
         }
         // calculate subtotal ,the price without tax and processing fee
@@ -227,10 +266,13 @@ public class ServiceLayer {
 
 
 
+
+
 //The processing fee is applied only once per order, regardless of the number of items in the order, unless the number of items in the order is greater than 10, in which case an additional processing fee of $15.49 is applied to the order.
 //The order must contain a valid state code.
 //The order-processing logic must properly update the quantity available for the item in the order
 //Sales tax applies only to the cost of the items.
+
 
         //get Quantity
         //check the itemType,
@@ -238,6 +280,11 @@ public class ServiceLayer {
 
 
     }
+
+    //get Quantity
+    //check the itemType,
+
+
 
     //Use a method
     //check the itemType,
@@ -248,6 +295,7 @@ public class ServiceLayer {
 //            //if ()
 //
 //    }
+}
 
     public InvoiceViewModel findInvoice(Integer id) {
 
@@ -364,6 +412,17 @@ public class ServiceLayer {
 
         return console.isPresent() ? buildConsoleViewModel(console.get()) : null;
     }
+    public List<ConsoleViewModel> findConsoleByManufacturer(String manufacturer) {
+        List<Console> consoleList = consoleRepository.findByManufacturer(manufacturer);
+        List<ConsoleViewModel> consoles= new ArrayList<>();
+        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
+        for(int i = 0;i<consoleList.size(); i++){
+            if(consoles!=null){
+                consoles.add(buildConsoleViewModel(consoleList.get(i)));
+            }
+        }
+        return consoles;
+    }
 
     private ConsoleViewModel buildConsoleViewModel(Console console) {
 
@@ -458,11 +517,39 @@ public class ServiceLayer {
         return tshirt.isPresent() ? buildTshirtViewModel(tshirt.get()) : null ;
         //buildTshirtViewModel(tshirt.get()) : null;
     }
+    public List<TshirtViewModel> findTshirtBySize(String size) {
+//            List<Tshirt> tshirts = tshirtRepository.findAll();
+       List<Tshirt> tshirtList = tshirtRepository.findBySize(size);
+        List<TshirtViewModel> tshirts= new ArrayList<>();
+       //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
+
+        for(int i = 0;i<tshirtList.size(); i++){
+            if(tshirts!=null){
+                tshirts.add(buildTshirtViewModel(tshirtList.get(i)));
+            }
+
+        }
+        return tshirts;
+        //buildTshirtViewModel(tshirt.get()) : null;
+    }
+    public List<TshirtViewModel> findTshirtByColor(String color) {
+//            List<Tshirt> tshirts = tshirtRepository.findAll();
+        List<Tshirt> tshirtList = tshirtRepository.findByColor(color);
+        List<TshirtViewModel> tshirts= new ArrayList<>();
+        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
+        for(int i = 0;i<tshirtList.size(); i++){
+            if(tshirts!=null){
+                tshirts.add(buildTshirtViewModel(tshirtList.get(i)));
+            }
+
+        }
+        return tshirts;
+    }
 
     private TshirtViewModel buildTshirtViewModel(Tshirt tshirt) {
 
 
-        //Optional<Tshirt> tshirt1 = tshirtRepository.findById(tshirt.getId());
+        Optional<Tshirt> tshirt1 = tshirtRepository.findById(tshirt.getId());
 
 
         TshirtViewModel tshirtViewModel = new TshirtViewModel();

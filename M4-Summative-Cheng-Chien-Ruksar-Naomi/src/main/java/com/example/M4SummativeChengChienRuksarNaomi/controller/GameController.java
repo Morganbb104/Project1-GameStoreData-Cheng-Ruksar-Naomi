@@ -4,6 +4,7 @@ import com.example.M4SummativeChengChienRuksarNaomi.models.Games;
 import com.example.M4SummativeChengChienRuksarNaomi.repository.GameRepository;
 import com.example.M4SummativeChengChienRuksarNaomi.service.ServiceLayer;
 import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.GameViewModel;
+import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.TshirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,18 @@ public class GameController {
     public GameViewModel getGameById(@PathVariable Integer id){
         return serviceLayer.findGame(id);
 
+    }
+    @GetMapping("/game/{studio}")
+    public List<GameViewModel> getGameByStudio(@PathVariable String studio) {
+        return serviceLayer.findGameByStudio(studio);
+    }
+    @GetMapping("/game/{esrbRating}")
+    public List<GameViewModel> getGameByEsrbRating(@PathVariable String esrbRating) {
+        return serviceLayer.findGameByEsrbRating(esrbRating);
+    }
+    @GetMapping("/game/{studio}")
+    public List<GameViewModel> getGameByTitle(@PathVariable String title) {
+        return serviceLayer.findGameByTitle(title);
     }
 
     @PutMapping("/game/")

@@ -31,6 +31,14 @@ public class TshirtController {
     public TshirtViewModel getTshirtById(@PathVariable int id) {
         return serviceLayer.findTshirtById(id);
     }
+    @GetMapping("/tshirts/{size}")
+    public List<TshirtViewModel> getTshirtBySize(@PathVariable String size) {
+        return serviceLayer.findTshirtBySize(size);
+    }
+    @GetMapping("/tshirts/{color}")
+    public List<TshirtViewModel> getTshirtByColor(@PathVariable String color) {
+        return serviceLayer.findTshirtByColor(color);
+    }
 
     @PostMapping("/tshirts")
     @ResponseStatus(HttpStatus.CREATED)
