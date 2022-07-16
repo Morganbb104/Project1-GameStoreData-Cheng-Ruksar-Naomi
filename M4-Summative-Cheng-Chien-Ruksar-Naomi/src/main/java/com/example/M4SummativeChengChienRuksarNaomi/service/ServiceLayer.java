@@ -212,6 +212,19 @@ public class ServiceLayer {
         }else{
             throw new IllegalArgumentException("no matching product type includes 'game' 'console' 'tshirt' ");
         }
+        // calculate subtotal ,the price without tax and processing fee
+        // setting subtotal by getting unitPrice X quantity
+        invoice.setSubtotal(invoice.getUnitPrice().multiply(BigDecimal.valueOf(invoice.getQuantity())));
+        // getting subtotal
+        invoice.setSubtotal(invoice.getSubtotal());
+
+        // calculate tax
+        //get state and rate
+
+
+       invoice.setTax(invoice.getSubtotal());
+
+
 
 
 //The processing fee is applied only once per order, regardless of the number of items in the order, unless the number of items in the order is greater than 10, in which case an additional processing fee of $15.49 is applied to the order.
@@ -222,6 +235,8 @@ public class ServiceLayer {
         //get Quantity
         //check the itemType,
         //Sales tax applies only to the cost of the items.
+
+
     }
 
     //Use a method
