@@ -33,7 +33,7 @@ public class ConsoleController {
         return serviceLayer.findConsoleById(id);
     }
 
-    @GetMapping("/game/{studio}")
+    @GetMapping("/consoles/{manufacturer}")
     public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable String manufacturer) {
         return serviceLayer.findConsoleByManufacturer(manufacturer);
     }

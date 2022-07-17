@@ -50,7 +50,7 @@ public class GameController {
     public List<GameViewModel> getGameByEsrbRating(@PathVariable String esrbRating) {
         return serviceLayer.findGameByEsrbRating(esrbRating);
     }
-    @GetMapping("/game/{studio}")
+    @GetMapping("/game/{title}")
     public List<GameViewModel> getGameByTitle(@PathVariable String title) {
         return serviceLayer.findGameByTitle(title);
     }

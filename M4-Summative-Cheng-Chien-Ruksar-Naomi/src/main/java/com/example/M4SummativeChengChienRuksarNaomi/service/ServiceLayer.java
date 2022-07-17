@@ -6,7 +6,6 @@ import com.example.M4SummativeChengChienRuksarNaomi.models.*;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Games;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Invoice;
-import com.example.M4SummativeChengChienRuksarNaomi.models.ProcessingFee;
 import com.example.M4SummativeChengChienRuksarNaomi.models.SalesTaxRate;
 
 import com.example.M4SummativeChengChienRuksarNaomi.repository.*;
@@ -14,7 +13,6 @@ import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.NoTransactionException;
 
 import javax.transaction.Transactional;
@@ -123,7 +121,6 @@ public class ServiceLayer {
 
         // Get the associated Game
         // Optional<Game> game = gameRepository.findById(game.getId());
-
         // Assemble the GameViewModel
         GameViewModel gvm = new GameViewModel();
         gvm.setId(game.getId());
@@ -133,11 +130,10 @@ public class ServiceLayer {
         gvm.setEsrbRating(game.getEsrbRating());
         gvm.setQuantity(game.getQuantity());
         gvm.setStudio(game.getStudio());
-
-
         // Return the GameViewModel
         return gvm;
     }
+
 
     public List<GameViewModel> findAllGames() {
 
@@ -152,6 +148,7 @@ public class ServiceLayer {
 
         return gvmList;
     }
+
 
     @Transactional
     public void updateGame(GameViewModel viewModel) {
@@ -180,205 +177,6 @@ public class ServiceLayer {
 
     }
 
-<<<<<<< HEAD
-=======
-    @Transactional
-    public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel) {
-
-        // Persist invoice
-        Invoice invoice = new Invoice();
-//        invoice.setId(viewModel.getId());
-
-        invoice.setName(viewModel.getName());
-        invoice.setStreet(viewModel.getStreet());
-        invoice.setCity(viewModel.getCity());
-        invoice.setState(viewModel.getState());
-        invoice.setZipcode(viewModel.getZipcode());
-        invoice.setItemType(viewModel.getItemType());
-        invoice.setItemId(viewModel.getItemId());
-        invoice.setUnitPrice(viewModel.getUnitPrice());
-        invoice.setQuantity(viewModel.getQuantity());
-//        invoice.setSubtotal(viewModel.getSubtotal());// Don't exist
-//        invoice.setTax(viewModel.getTax());// Don't exist
-//        invoice.setProcessingFee(viewModel.getProcessingFee());// Don't exist
-//        invoice.setTotal(viewModel.getTotal());
-
-        invoice = invoiceRepository.save(invoice);
-        viewModel.setId(invoice.getId());
-
-
-        // Order quantity must be greater than zero.
-        if (invoice.getQuantity() == 0) {
-            throw new IllegalArgumentException("Your Quantity can not be null");
-        }
-
-        //getting state
-//        if(invoice.getState().equals(invoice.getState(viewModel.getState(String )))){}
-
-        //Order quantity must be less than or equal to the number of items available in inventory.
-        if (invoice.getItemType().equals("game")) {
-            if (invoice.getQuantity() <= findGame(invoice.getItemId()).getQuantity()) {
-                GameViewModel game = findGame(invoice.getItemId());// got game items' ID
-                game.setQuantity(game.getQuantity() - invoice.getQuantity());// checking the supply for invoice
-                invoice.setUnitPrice(game.getPrice());//setting unit price from game
-                invoice.setUnitPrice(invoice.getUnitPrice());// setting the unit price by getting the unit price from invoice
-
-            } else {// go this way if there's no enough items for invoice
-                throw new NoTransactionException("There are not enough game items for your order");
-            }
-        } else if (invoice.getItemType().equals("console")) {
-            if (invoice.getQuantity() <= findConsoleById(invoice.getItemId()).getQuantity()) {
-                ConsoleViewModel console = findConsoleById(invoice.getItemId());
-                // checking the supply for invoice
-                console.setQuantity(console.getQuantity() - invoice.getQuantity());
-                //set price
-                invoice.setUnitPrice(console.getPrice());
-                invoice.setUnitPrice(invoice.getUnitPrice());
-            } else {
-                throw new NoTransactionException("There are not enough game items for your order");
-            }
-        } else if (invoice.getItemType().equals("tshirt")) {
-            if (invoice.getQuantity() <= findTshirtById(invoice.getItemId()).getQuantity()) {
-                TshirtViewModel tshirt = findTshirtById(invoice.getItemId());
-                // checking the supply for invoice
-                tshirt.setQuantity(tshirt.getQuantity() - invoice.getQuantity());
-                //set price
-                invoice.setUnitPrice(tshirt.getPrice());
-                invoice.setUnitPrice(invoice.getUnitPrice());
-            } else {
-                throw new NoTransactionException("There are not enough tshirt items for your order");
-            }
-
-
-        } else {
-            throw new IllegalArgumentException("no matching product type includes 'game' 'console' 'tshirt' ");
-        }
-        // calculate subtotal ,the price without tax and processing fee
-        // setting subtotal by getting unitPrice X quantity
-        invoice.setSubtotal(invoice.getUnitPrice().multiply(BigDecimal.valueOf(invoice.getQuantity())));
-        // getting subtotal
-        invoice.setSubtotal(invoice.getSubtotal());
-
-        // calculate tax
-        //get state and rate
-
-
-        invoice.setTax(invoice.getSubtotal());
-
-
-//The processing fee is applied only once per order, regardless of the number of items in the order, unless the number of items in the order is greater than 10, in which case an additional processing fee of $15.49 is applied to the order.
-//The order must contain a valid state code.
-//The order-processing logic must properly update the quantity available for the item in the order
-//Sales tax applies only to the cost of the items.
-
-
-        //get Quantity
-        //check the itemType,
-        //Sales tax applies only to the cost of the items.
-
-
-        //get Quantity
-        //check the itemType,
-
-
-        //Use a method
-        //check the itemType,
-        //check the UnitPrice,
-        //check enough Quantity form database,
-//    public void subTotal(){
-//
-//            //if ()
-//
-//    }
-
-    }
-
-    public InvoiceViewModel findInvoice(Integer id) {
-
-        // Get the invoice object first
-        Optional<Invoice> invoice = invoiceRepository.findById(id);
-
-        return invoice.isPresent() ? buildInvoiceViewModel(invoice.get()) : null;
-    }
-
-    private InvoiceViewModel buildInvoiceViewModel(Invoice invoice) {
-
-        // Get the associated invoice
-        // Optional<SalesTaxRate> salesTax = salesTaxRateRepository.findById(game.getId());
-
-        // Assemble the InvoiceViewModel
-        InvoiceViewModel ivm = new InvoiceViewModel();
-        ivm.setId(invoice.getId());
-        ivm.setName(invoice.getName());
-        ivm.setStreet(invoice.getStreet());
-        ivm.setCity(invoice.getCity());
-        ivm.setState(invoice.getState());
-        ivm.setZipcode(invoice.getZipcode());
-        ivm.setItemId(invoice.getItemId());
-        ivm.setUnitPrice(invoice.getUnitPrice());
-        ivm.setQuantity(invoice.getQuantity());
-        ivm.setSubtotal(invoice.getSubtotal());
-        ivm.setTax(invoice.getTax());
-        ivm.setProcessingFee(invoice.getProcessingFee());
-        ivm.setTotal(invoice.getTotal());
-
-        // Return the AlbumViewModel
-        return ivm;
-    }
-
-    public List<InvoiceViewModel> findAllInvoice() {
-
-        List<Invoice> invoiceList = invoiceRepository.findAll();
-
-        List<InvoiceViewModel> ivmList = new ArrayList<>();
-
-        for (Invoice invoice : invoiceList) {
-            InvoiceViewModel ivm = buildInvoiceViewModel(invoice);
-            ivmList.add(ivm);
-        }
-
-        return ivmList;
-    }
-
-    @Transactional
-    public void updateInvoice(InvoiceViewModel viewModel) {
-
-        // Update the album information
-        Invoice invoice= new Invoice();
-        invoice.setId(viewModel.getId());
-        invoice.setName(viewModel.getName());
-        invoice.setStreet(viewModel.getStreet());
-        invoice.setCity(viewModel.getCity());
-        invoice.setState(viewModel.getState());
-        invoice.setZipcode(viewModel.getZipcode());
-        invoice.setItemId(viewModel.getItemId());
-        invoice.setUnitPrice(viewModel.getUnitPrice());
-        invoice.setQuantity(viewModel.getQuantity());
-        invoice.setSubtotal(viewModel.getSubtotal());
-        invoice.setTax(viewModel.getTax());
-        invoice.setProcessingFee(viewModel.getProcessingFee());
-        invoice.setTotal(viewModel.getTotal());
-
-
-        invoiceRepository.save(invoice);
-
-    }
-
-    @Transactional
-    public void removeInvoice(int id) {
-
-
-        // Remove invoice
-        invoiceRepository.deleteById(id);
-
-    }
-
-    //Create Operation For Processing Fee//Create Operation For Processing Fee
-
->>>>>>> 24c0a95e4dd16baef6a64a3fcf91f73e6b882d60
-
-
-    // Console service layer
 
 
     @Transactional
@@ -545,10 +343,6 @@ public class ServiceLayer {
 
     private TshirtViewModel buildTshirtViewModel(Tshirt tshirt) {
 
-
-        Optional<Tshirt> tshirt1 = tshirtRepository.findById(tshirt.getId());
-
-
         TshirtViewModel tshirtViewModel = new TshirtViewModel();
 
         tshirtViewModel.setId(tshirt.getId());
@@ -557,8 +351,8 @@ public class ServiceLayer {
         tshirtViewModel.setSize(tshirt.getSize());
         tshirtViewModel.setQuantity(tshirt.getQuantity());
         tshirtViewModel.setDescription(tshirt.getDescription());
-        BigDecimal priceFormatter = tshirtViewModel.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP);
-        tshirtViewModel.setPrice(priceFormatter);
+        //BigDecimal priceFormatter = tshirtViewModel.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP);
+        tshirtViewModel.setPrice(tshirtViewModel.getPrice());
 
 
         return tshirtViewModel;
@@ -606,7 +400,6 @@ public class ServiceLayer {
         tshirtRepository.deleteById(id);
 
     }
-
     @Transactional
     public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel) {
 
@@ -646,7 +439,7 @@ public class ServiceLayer {
                 GameViewModel game = findGame(invoice.getItemId());// got game items' ID
                 game.setQuantity(game.getQuantity() - invoice.getQuantity());// checking the supply for invoice
                 invoice.setUnitPrice(game.getPrice());//setting unit price from game
-//                invoice.setUnitPrice(invoice.getUnitPrice());// setting the unit price by getting the unit price from invoice
+                invoice.setUnitPrice(invoice.getUnitPrice());// setting the unit price by getting the unit price from invoice
 
             } else {// go this way if there's no enough items for invoice
                 throw new NoTransactionException("There are not enough game items for your order");
@@ -678,34 +471,30 @@ public class ServiceLayer {
         } else {
             throw new IllegalArgumentException("no matching product type includes 'game' 'console' 'tshirt' ");
         }
-
-        BigDecimal subTotal = invoice.getUnitPrice().multiply(BigDecimal.valueOf(invoice.getQuantity());
-
+        BigDecimal subTotal =invoice.getUnitPrice().multiply(BigDecimal.valueOf(invoice.getQuantity()));
         //BigDecimal subtotal =
         invoice.setSubtotal(subTotal);
 
         //BigDecimal.valueOf(itemQuantity)
 
-                //(invoice.getUnitPrice() * invoice.getQuantity());
+        //(invoice.getUnitPrice() * invoice.getQuantity());
+        BigDecimal theTaxRate =findSalesTaxByState(invoice.getState());
 
-        BigDecimal taxRate = SalesTaxRateRepository.findById(invoice.getState()).get().getTaxRate();
-
-                //(invoice.getState()).get().getTaxRate();
+        //(invoice.getState()).get().getTaxRate();
         //get tax calc tax and set tax (taxes repo)
         //tax = subtotal * taxrate
-        BigDecimal tax = invoice.getSubtotal().multiply(taxRate);
+        BigDecimal tax = invoice.getSubtotal().multiply(theTaxRate);
 //set tax on invoice
         invoice.setTax(tax);
 
 //calc processing fee
-        BigDecimal processingFee = processingFeeRepository.findById(invoice.getItemType()).getFee();
+        BigDecimal processingFee = processingFeeRepository.findById(invoice.getItemType()).get().getProcessingFee();
         invoice.setProcessingFee(processingFee);
 //total = subtotal + tax + fee
         BigDecimal total = invoice.getSubtotal().add(invoice.getTax()).add(invoice.getProcessingFee());
         invoice.setTotal(total);
 
         invoice = invoiceRepository.save(invoice);
-
 
 
 
@@ -724,6 +513,34 @@ public class ServiceLayer {
         //check enough Quantity form database
 
         return viewModel;
+    }
+    public BigDecimal findSalesTaxByState(String state) {
+//            List<Tshirt> tshirts = tshirtRepository.findAll();
+        Invoice invoice =new Invoice();
+        //SalesTaxRate salesTax = invoiceRepository.getState();
+         SalesTaxRateViewModel salesTaxRate= new SalesTaxRateViewModel();
+        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
+
+         buildSalesTaxRateViewModel(salesTaxRateRepository.findByState(invoice.getState()));
+
+        return salesTaxRate.getRate();
+
+    }
+    private SalesTaxRateViewModel buildSalesTaxRateViewModel(SalesTaxRate salesTaxRate) {
+        Invoice invoice =new Invoice();
+
+        SalesTaxRate salesTaxRate1 = (SalesTaxRate) salesTaxRateRepository.findByState(invoice.getState());
+
+
+        SalesTaxRateViewModel salesTaxRateViewModel = new SalesTaxRateViewModel();
+
+salesTaxRateViewModel.getRate();
+salesTaxRateViewModel.getState();
+
+
+
+
+        return salesTaxRateViewModel;
     }
 
     public InvoiceViewModel findInvoice(Integer id) {
@@ -808,10 +625,7 @@ public class ServiceLayer {
 
     //Create Operation For Processing Fee//Create Operation For Processing Fee
 
-
-
-
-}
+   }
 
 
 
