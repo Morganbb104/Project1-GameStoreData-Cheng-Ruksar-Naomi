@@ -13,7 +13,7 @@ import java.util.Objects;
 @Table(name = "game")
 public class Games {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "game_id")
     @NotNull
     private Integer id;
@@ -33,6 +33,15 @@ public class Games {
 
     public Games(Integer id, String esrbRating, String title, String description, BigDecimal price, String studio, int quantity) {
         this.id = id;
+        this.esrbRating = esrbRating;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.studio = studio;
+        this.quantity = quantity;
+    }
+
+    public Games(String esrbRating, String title, String description, BigDecimal price, String studio, int quantity){
         this.esrbRating = esrbRating;
         this.title = title;
         this.description = description;

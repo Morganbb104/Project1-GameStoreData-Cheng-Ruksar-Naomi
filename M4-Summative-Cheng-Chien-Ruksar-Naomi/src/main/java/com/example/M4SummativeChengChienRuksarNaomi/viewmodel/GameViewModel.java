@@ -13,19 +13,19 @@ import java.util.Objects;
 public class GameViewModel {
 
 
-    @NotNull
+
     private Integer id;
-    @NotNull
+
     private String esrbRating;
-    @NotNull
+
     private String title;
-    @NotNull
+
     private String description;
-    @NotNull
+
     private BigDecimal price;
-    @NotNull
+
     private String studio;
-    @NotNull
+
     private int quantity;
 
 
@@ -41,6 +41,17 @@ public class GameViewModel {
         this.studio = studio;
         this.quantity = quantity;
     }
+
+    public GameViewModel(String esrbRating, String title, String description, double price, String studio, int quantity) {
+        this.esrbRating = esrbRating;
+        this.title = title;
+        this.description = description;
+        this.price = BigDecimal.valueOf(price);
+        this.studio = studio;
+        this.quantity = quantity;
+    }
+
+
 
     public Integer getId() {
         return id;
