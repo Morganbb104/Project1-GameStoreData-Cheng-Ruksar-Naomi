@@ -284,6 +284,7 @@ public class ServiceLayer {
 
     @Transactional
     public TshirtViewModel saveTshirt(TshirtViewModel viewModel){
+        System.out.println("save tshirt");
         Tshirt tshirt = new Tshirt();
         tshirt.setId(viewModel.getId());
         tshirt.setColor(viewModel.getColor());
@@ -291,8 +292,8 @@ public class ServiceLayer {
         tshirt.setPrice(viewModel.getPrice());
         tshirt.setQuantity(viewModel.getQuantity());
         tshirt.setDescription(viewModel.getDescription());
-        BigDecimal priceFormatter = tshirt.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP);
-        tshirt.setPrice(priceFormatter);
+//        BigDecimal priceFormatter = tshirt.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP);
+//        tshirt.setPrice(priceFormatter);
         tshirt = tshirtRepository.save(tshirt);
 
         viewModel.setId(tshirt.getId());
@@ -342,17 +343,18 @@ public class ServiceLayer {
     }
 
     private TshirtViewModel buildTshirtViewModel(Tshirt tshirt) {
+        System.out.println("Tshirt build view model");
 
         TshirtViewModel tshirtViewModel = new TshirtViewModel();
-
         tshirtViewModel.setId(tshirt.getId());
         tshirtViewModel.setColor(tshirt.getColor());
         tshirtViewModel.setPrice(tshirt.getPrice());
         tshirtViewModel.setSize(tshirt.getSize());
         tshirtViewModel.setQuantity(tshirt.getQuantity());
         tshirtViewModel.setDescription(tshirt.getDescription());
+
         //BigDecimal priceFormatter = tshirtViewModel.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP);
-        tshirtViewModel.setPrice(tshirtViewModel.getPrice());
+
 
 
         return tshirtViewModel;
@@ -360,7 +362,7 @@ public class ServiceLayer {
 
 
     public List<TshirtViewModel> findAllTshirts() {
-
+        System.out.println("tshirt find all");
         List<Tshirt> tshirtList = tshirtRepository.findAll();
 
         List<TshirtViewModel> tvmList = new ArrayList<>();

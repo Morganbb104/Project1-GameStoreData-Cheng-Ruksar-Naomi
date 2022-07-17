@@ -23,8 +23,9 @@ public class GameController {
     @PostMapping("/game")
     //using created to give us the status on whether or not the record was creaated
     @ResponseStatus(HttpStatus.CREATED)
+
     public GameViewModel addGame(@RequestBody @Valid  GameViewModel gameViewModel) {
-//
+
         //saving the new customer in  the repo, whys this so simple
         return serviceLayer.saveGame(gameViewModel);
 

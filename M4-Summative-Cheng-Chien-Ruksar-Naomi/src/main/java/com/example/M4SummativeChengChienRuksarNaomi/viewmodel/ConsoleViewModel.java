@@ -13,26 +13,22 @@ import java.util.Objects;
 
 public class ConsoleViewModel{
 
-    @NotNull
+
     private Integer id;
 
-    @NotNull
     private String model;
 
-    @NotNull
     private String manufacturer;
 
 
-
-    @NotNull
     private String memoryAmount;
 
-    @NotNull
+
     private String processor;
 
-    @NotNull
+
     private BigDecimal price;
-    @NotNull
+
     private int quantity;
 
     public ConsoleViewModel(Integer id, String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
@@ -44,7 +40,14 @@ public class ConsoleViewModel{
         this.price = price;
         this.quantity = quantity;
     }
-
+    public ConsoleViewModel( String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.memoryAmount = memoryAmount;
+        this.processor = processor;
+        this.price = price;
+        this.quantity = quantity;
+    }
     public ConsoleViewModel() {
     }
 
@@ -107,14 +110,14 @@ public class ConsoleViewModel{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Console)) return false;
-        Console console = (Console) o;
-        return getQuantity() == console.getQuantity() && Objects.equals(getId(), console.getId()) && Objects.equals(getModel(), console.getModel()) && Objects.equals(getManufacturer(), console.getManufacturer()) && Objects.equals(getMemoryAmount(), console.getMemoryAmount()) && Objects.equals(getProcessor(), console.getProcessor()) && Objects.equals(getPrice(), console.getPrice());
+        if (o == null || getClass() != o.getClass()) return false;
+        ConsoleViewModel that = (ConsoleViewModel) o;
+        return quantity == that.quantity && Objects.equals(id, that.id) && Objects.equals(model, that.model) && Objects.equals(manufacturer, that.manufacturer) && Objects.equals(memoryAmount, that.memoryAmount) && Objects.equals(processor, that.processor) && Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getModel(), getManufacturer(), getMemoryAmount(), getProcessor(), getPrice(), getQuantity());
+        return Objects.hash(id, model, manufacturer, memoryAmount, processor, price, quantity);
     }
 
     @Override

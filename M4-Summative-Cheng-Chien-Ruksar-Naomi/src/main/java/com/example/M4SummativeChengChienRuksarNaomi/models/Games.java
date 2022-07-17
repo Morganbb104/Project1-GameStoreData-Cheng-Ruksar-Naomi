@@ -15,20 +15,20 @@ public class Games {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "game_id")
-    @NotNull
+
     private Integer id;
     @Column(name = "esrb_rating")
-    @NotNull
+
     private String esrbRating;
-    @NotNull
+
     private String title;
-    @NotNull
+
     private String description;
-    @NotNull
+
     private BigDecimal price;
-    @NotNull
+
     private String studio;
-    @NotNull
+
     private int quantity;
 
     public Games(Integer id, String esrbRating, String title, String description, BigDecimal price, String studio, int quantity) {

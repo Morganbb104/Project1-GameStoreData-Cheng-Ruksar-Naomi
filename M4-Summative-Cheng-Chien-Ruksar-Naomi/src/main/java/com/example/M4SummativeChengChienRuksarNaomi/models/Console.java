@@ -14,9 +14,9 @@ public class Console {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "console_id")
-    @NotNull
+
     private Integer id;
 
     @NotNull
@@ -47,6 +47,16 @@ public class Console {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public Console( String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.memoryAmount = memoryAmount;
+        this.processor = processor;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
 
     public Console() {
     }

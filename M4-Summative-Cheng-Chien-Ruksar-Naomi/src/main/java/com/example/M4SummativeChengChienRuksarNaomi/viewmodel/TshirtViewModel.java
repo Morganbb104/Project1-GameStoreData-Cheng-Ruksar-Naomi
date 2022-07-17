@@ -93,14 +93,14 @@ public class TshirtViewModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Tshirt)) return false;
-        Tshirt tshirt = (Tshirt) o;
-        return getQuantity() == tshirt.getQuantity() && Objects.equals(getId(), tshirt.getId()) && Objects.equals(getSize(), tshirt.getSize()) && Objects.equals(getColor(), tshirt.getColor()) && Objects.equals(getDescription(), tshirt.getDescription()) && Objects.equals(getPrice(), tshirt.getPrice());
+        if (o == null || getClass() != o.getClass()) return false;
+        TshirtViewModel that = (TshirtViewModel) o;
+        return quantity == that.quantity && Objects.equals(id, that.id) && Objects.equals(size, that.size) && Objects.equals(color, that.color) && Objects.equals(description, that.description) && Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getSize(), getColor(), getDescription(), getPrice(), getQuantity());
+        return Objects.hash(id, size, color, description, price, quantity);
     }
 
     @Override
