@@ -43,15 +43,15 @@ public class GameController {
         return serviceLayer.findGame(id);
 
     }
-    @GetMapping("/game/{studio}")
+    @GetMapping("/game/studio/{studio}")
     public List<GameViewModel> getGameByStudio(@PathVariable String studio) {
         return serviceLayer.findGameByStudio(studio);
     }
-    @GetMapping("/game/{esrbRating}")
+    @GetMapping("/game/esrbRating/{esrbRating}")
     public List<GameViewModel> getGameByEsrbRating(@PathVariable String esrbRating) {
         return serviceLayer.findGameByEsrbRating(esrbRating);
     }
-    @GetMapping("/game/{title}")
+    @GetMapping("/game/title/{title}")
     public List<GameViewModel> getGameByTitle(@PathVariable String title) {
         return serviceLayer.findGameByTitle(title);
     }
