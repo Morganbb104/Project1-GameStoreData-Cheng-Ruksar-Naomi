@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@RestController
 public class TshirtController {
 
 
@@ -31,11 +32,11 @@ public class TshirtController {
     public TshirtViewModel getTshirtById(@PathVariable int id) {
         return serviceLayer.findTshirtById(id);
     }
-    @GetMapping("/tshirts/{size}")
+    @GetMapping("/tshirts/size/{size}")
     public List<TshirtViewModel> getTshirtBySize(@PathVariable String size) {
         return serviceLayer.findTshirtBySize(size);
     }
-    @GetMapping("/tshirts/{color}")
+    @GetMapping("/tshirts/color/{color}")
     public List<TshirtViewModel> getTshirtByColor(@PathVariable String color) {
         return serviceLayer.findTshirtByColor(color);
     }
