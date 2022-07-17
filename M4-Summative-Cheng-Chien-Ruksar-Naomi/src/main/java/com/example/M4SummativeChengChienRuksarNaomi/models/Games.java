@@ -31,15 +31,15 @@ public class Games {
 
     private int quantity;
 
-    public Games(Integer id, String esrbRating, String title, String description, BigDecimal price, String studio, int quantity) {
-        this.id = id;
-        this.esrbRating = esrbRating;
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.studio = studio;
-        this.quantity = quantity;
-    }
+//    public Games(Integer id, String esrbRating, String title, String description, BigDecimal price, String studio, int quantity) {
+//        this.id = id;
+//        this.esrbRating = esrbRating;
+//        this.title = title;
+//        this.description = description;
+//        this.price = price;
+//        this.studio = studio;
+//        this.quantity = quantity;
+//    }
 
     public Games() {
     }

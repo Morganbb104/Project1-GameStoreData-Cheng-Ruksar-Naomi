@@ -13,22 +13,22 @@ import java.util.Objects;
 
 public class ConsoleViewModel{
 
-    @NotNull
+
     private Integer id;
-    @NotNull
+
     private String model;
-    @NotNull
+
     private String manufacturer;
 
-    @NotNull
+
     private String memoryAmount;
 
-    @NotNull
+
     private String processor;
 
-    @NotNull
+
     private BigDecimal price;
-    @NotNull
+
     private int quantity;
 
     public ConsoleViewModel(Integer id, String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
@@ -40,7 +40,14 @@ public class ConsoleViewModel{
         this.price = price;
         this.quantity = quantity;
     }
-
+    public ConsoleViewModel( String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.memoryAmount = memoryAmount;
+        this.processor = processor;
+        this.price = price;
+        this.quantity = quantity;
+    }
     public ConsoleViewModel() {
     }
 

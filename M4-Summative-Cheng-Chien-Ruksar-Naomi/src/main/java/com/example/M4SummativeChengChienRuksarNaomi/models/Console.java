@@ -48,6 +48,16 @@ public class Console {
         this.quantity = quantity;
     }
 
+    public Console( String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.memoryAmount = memoryAmount;
+        this.processor = processor;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+
     public Console() {
     }
 
