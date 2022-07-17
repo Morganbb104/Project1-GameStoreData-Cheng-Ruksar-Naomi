@@ -14,9 +14,9 @@ public class Console {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "console_id")
-    @NotNull
+
     private Integer id;
 
     @NotNull

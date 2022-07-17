@@ -15,14 +15,10 @@ public class ConsoleViewModel{
 
     @NotNull
     private Integer id;
-
     @NotNull
     private String model;
-
     @NotNull
     private String manufacturer;
-
-
 
     @NotNull
     private String memoryAmount;
@@ -107,14 +103,14 @@ public class ConsoleViewModel{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Console)) return false;
-        Console console = (Console) o;
-        return getQuantity() == console.getQuantity() && Objects.equals(getId(), console.getId()) && Objects.equals(getModel(), console.getModel()) && Objects.equals(getManufacturer(), console.getManufacturer()) && Objects.equals(getMemoryAmount(), console.getMemoryAmount()) && Objects.equals(getProcessor(), console.getProcessor()) && Objects.equals(getPrice(), console.getPrice());
+        if (o == null || getClass() != o.getClass()) return false;
+        ConsoleViewModel that = (ConsoleViewModel) o;
+        return quantity == that.quantity && Objects.equals(id, that.id) && Objects.equals(model, that.model) && Objects.equals(manufacturer, that.manufacturer) && Objects.equals(memoryAmount, that.memoryAmount) && Objects.equals(processor, that.processor) && Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getModel(), getManufacturer(), getMemoryAmount(), getProcessor(), getPrice(), getQuantity());
+        return Objects.hash(id, model, manufacturer, memoryAmount, processor, price, quantity);
     }
 
     @Override

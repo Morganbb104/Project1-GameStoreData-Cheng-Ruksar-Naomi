@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @RestController
 public class TshirtController {
 
@@ -25,7 +26,9 @@ public class TshirtController {
     @GetMapping("/tshirts")
     @ResponseStatus(HttpStatus.OK)
     public List<TshirtViewModel> getAllTshirts(){
+        System.out.println("controller is hit");
         return serviceLayer.findAllTshirts();
+
     }
 
     @GetMapping("/tshirts/{id}")
