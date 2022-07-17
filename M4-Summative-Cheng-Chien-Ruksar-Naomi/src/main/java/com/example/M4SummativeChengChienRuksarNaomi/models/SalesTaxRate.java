@@ -2,8 +2,7 @@ package com.example.M4SummativeChengChienRuksarNaomi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
@@ -14,8 +13,9 @@ import java.util.Objects;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "sales_tax_rate")
-public class SalesTaxRate extends Invoice {
-
+public class SalesTaxRate {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Size(min = 2, max = 2)
     public String state;
@@ -52,12 +52,12 @@ public class SalesTaxRate extends Invoice {
         if (this == o) return true;
         if (!(o instanceof SalesTaxRate)) return false;
         SalesTaxRate that = (SalesTaxRate) o;
-        return Objects.equals(state, that.state) && Objects.equals(rate, that.rate);
+        return Objects.equals(getState(), that.getState()) && Objects.equals(getRate(), that.getRate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(state, rate);
+        return Objects.hash(getState(), getRate());
     }
 
     @Override

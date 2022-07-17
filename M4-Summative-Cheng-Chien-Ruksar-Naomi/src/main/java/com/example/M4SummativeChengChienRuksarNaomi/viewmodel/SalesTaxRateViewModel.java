@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class SalesTaxRateViewModel extends InvoiceViewModel {
+public class SalesTaxRateViewModel  {
 
     @NotNull
 
@@ -24,12 +24,10 @@ public class SalesTaxRateViewModel extends InvoiceViewModel {
     public void SalesTaxRate() {
     }
 
-    @Override
     public String getState() {
         return state;
     }
 
-    @Override
     public void setState(String state) {
         this.state = state;
     }
@@ -47,12 +45,12 @@ public class SalesTaxRateViewModel extends InvoiceViewModel {
         if (this == o) return true;
         if (!(o instanceof SalesTaxRate)) return false;
         SalesTaxRate that = (SalesTaxRate) o;
-        return Objects.equals(state, that.state) && Objects.equals(rate, that.rate);
+        return Objects.equals(getState(), that.getState()) && Objects.equals(getRate(), that.getRate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(state, rate);
+        return Objects.hash(getState(), getRate());
     }
 
     @Override

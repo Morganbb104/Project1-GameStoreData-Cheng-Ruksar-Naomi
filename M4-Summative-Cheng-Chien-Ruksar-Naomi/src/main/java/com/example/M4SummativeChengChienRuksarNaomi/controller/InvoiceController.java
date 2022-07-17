@@ -48,7 +48,7 @@ public class InvoiceController {
     @DeleteMapping("/invoice/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteInvoice(@PathVariable int id) {
-        serviceLayer.removeGame(id);
+        serviceLayer.removeInvoice(id);
     }
 
 

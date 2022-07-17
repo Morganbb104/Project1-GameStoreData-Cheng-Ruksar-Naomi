@@ -31,6 +31,11 @@ public class Invoice {
     private String state;
 
 
+    @NotNull
+//    @Column(name = "zip_code")
+
+
+
     private String zipcode;
 
 
@@ -225,4 +230,6 @@ public class Invoice {
                 ", total=" + total +
                 '}';
     }
+
+
 }
