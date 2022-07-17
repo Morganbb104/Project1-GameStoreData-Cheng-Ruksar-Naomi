@@ -1,36 +1,19 @@
 package com.example.M4SummativeChengChienRuksarNaomi.viewmodel;
 
-import com.example.M4SummativeChengChienRuksarNaomi.models.Tshirt;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class TshirtViewModel {
 
-    @NotNull
+
     private Integer id;
-
-    @NotNull
     private String size;
-
-    @NotNull
     private String color;
-
-    @NotNull
     private String description;
-
-    @NotNull
     private BigDecimal price;
-
-    @NotNull
     private int quantity;
 
-    public void Tshirt(Integer id, String size, String color, String description, BigDecimal price, int quantity) {
+    public TshirtViewModel(Integer id,String size, String color, String description, BigDecimal price, int quantity) {
         this.id = id;
         this.size = size;
         this.color = color;
@@ -39,8 +22,20 @@ public class TshirtViewModel {
         this.quantity = quantity;
     }
 
-    public void Tshirt() {
+    public TshirtViewModel(String size, String color, String description, BigDecimal price, int quantity) {
+
+        this.size = size;
+        this.color = color;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
     }
+
+    public TshirtViewModel() {
+
+    }
+
+
 
     public Integer getId() {
         return id;

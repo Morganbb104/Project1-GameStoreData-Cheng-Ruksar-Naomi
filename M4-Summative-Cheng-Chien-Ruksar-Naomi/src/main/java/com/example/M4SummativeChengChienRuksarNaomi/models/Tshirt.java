@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Tshirt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "t_shirt_id")
 @NotNull
     private Integer id;
@@ -30,6 +30,14 @@ public class Tshirt {
 
     public Tshirt(Integer id, String size, String color, String description, BigDecimal price, int quantity) {
         this.id = id;
+        this.size = size;
+        this.color = color;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public Tshirt( String size, String color, String description, BigDecimal price, int quantity) {
         this.size = size;
         this.color = color;
         this.description = description;
