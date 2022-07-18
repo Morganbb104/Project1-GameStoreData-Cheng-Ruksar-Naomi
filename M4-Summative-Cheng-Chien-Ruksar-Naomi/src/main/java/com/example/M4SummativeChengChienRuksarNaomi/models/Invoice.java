@@ -13,61 +13,72 @@ import java.util.Objects;
 public class Invoice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "invoice_id")
-
+    @NotNull
     private Integer id;
 
-
+    @NotNull
     private String name;
 
-
+    @NotNull
     private String street;
 
-
+    @NotNull
     private String city;
 
-
+    @NotNull
     private String state;
 
 
     @NotNull
-//    @Column(name = "zip_code")
-
-
-
     private String zipcode;
 
-
+    @NotNull
     @Column(name = "item_type")
     private String itemType;
 
-
+    @NotNull
     @Column(name = "item_id")
     private int itemId;
 
-
+    @NotNull
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
 
-
+    @NotNull
     private int quantity;
 
-
+    @NotNull
     private BigDecimal subtotal;
 
-
+    @NotNull
     private BigDecimal tax;
 
-
+    @NotNull
     @Column(name = "processing_fee")
     private BigDecimal processingFee;
-
     @NotNull
     private BigDecimal total;
 
     public Invoice(Integer id, String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
         this.id = id;
+        this.name = name;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.itemType = itemType;
+        this.itemId = itemId;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+        this.subtotal = subtotal;
+        this.tax = tax;
+        this.processingFee = processingFee;
+        this.total = total;
+    }
+
+    public Invoice( String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
         this.name = name;
         this.street = street;
         this.city = city;

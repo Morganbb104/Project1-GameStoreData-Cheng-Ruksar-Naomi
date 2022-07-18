@@ -13,59 +13,66 @@ import java.util.Objects;
 public class InvoiceViewModel {
 
 
-    @NotNull
+
     private Integer id;
 
-    @NotNull
+
     private String name;
 
-    @NotNull
+
     private String street;
 
-    @NotNull
+
     private String city;
 
-    @NotNull
+
     private String state;
-
-    @NotNull
-
 
     private String zipcode;
 
-    @NotNull
+
 
     private String itemType;
 
-    @NotNull
 
     private int itemId;
 
 
 
-
-    @NotNull
-
     private BigDecimal unitPrice;
 
-    @NotNull
     private int quantity;
 
-    @NotNull
+
     private BigDecimal subtotal;
 
-    @NotNull
+
     private BigDecimal tax;
 
-    @NotNull
+
 //    @Column(name = "processing_fee")
     private BigDecimal processingFee;
 
-    @NotNull
     private BigDecimal total;
 
     public void Invoice(Integer id, String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
         this.id = id;
+        this.name = name;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.itemType = itemType;
+        this.itemId = itemId;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+        this.subtotal = subtotal;
+        this.tax = tax;
+        this.processingFee = processingFee;
+        this.total = total;
+    }
+
+    public void Invoice( String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
         this.name = name;
         this.street = street;
         this.city = city;
