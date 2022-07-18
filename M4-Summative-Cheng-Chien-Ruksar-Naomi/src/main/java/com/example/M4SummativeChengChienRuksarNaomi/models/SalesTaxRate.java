@@ -3,8 +3,6 @@ package com.example.M4SummativeChengChienRuksarNaomi.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -24,7 +22,7 @@ public class SalesTaxRate {
     @NotNull
     public BigDecimal rate;
 
-    public SalesTaxRate(String state, BigDecimal rate) {
+    public SalesTaxRate(int i, String state, BigDecimal rate) {
         this.state = state;
         this.rate = rate;
     }

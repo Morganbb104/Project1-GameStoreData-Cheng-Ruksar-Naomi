@@ -21,7 +21,7 @@ public class ProcessingFee {
 
     private BigDecimal fee;
 
-    public ProcessingFee(String productType, BigDecimal fee) {
+    public ProcessingFee(int i, String productType, BigDecimal fee) {
         this.productType = productType;
         this.fee = fee;
     }
