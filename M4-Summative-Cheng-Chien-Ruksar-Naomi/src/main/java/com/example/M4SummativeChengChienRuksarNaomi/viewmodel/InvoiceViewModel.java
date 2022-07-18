@@ -1,14 +1,11 @@
 package com.example.M4SummativeChengChienRuksarNaomi.viewmodel;
 
 import com.example.M4SummativeChengChienRuksarNaomi.models.Invoice;
+import com.example.M4SummativeChengChienRuksarNaomi.models.ProcessingFee;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Optional;
 
 public class InvoiceViewModel {
 
@@ -55,7 +52,7 @@ public class InvoiceViewModel {
 
     private BigDecimal total;
 
-    public void Invoice(Integer id, String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
+    public InvoiceViewModel(Integer id, String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
         this.id = id;
         this.name = name;
         this.street = street;
@@ -72,7 +69,7 @@ public class InvoiceViewModel {
         this.total = total;
     }
 
-    public void Invoice( String name, String street, String city, String state, String zipcode, String itemType, int itemId, BigDecimal unitPrice, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processingFee, BigDecimal total) {
+    public InvoiceViewModel(String name, String street, String city, String state, String zipcode, String itemType, int itemId,int quantity ) {
         this.name = name;
         this.street = street;
         this.city = city;
@@ -80,15 +77,16 @@ public class InvoiceViewModel {
         this.zipcode = zipcode;
         this.itemType = itemType;
         this.itemId = itemId;
-        this.unitPrice = unitPrice;
+       // this.unitPrice = unitPrice;
         this.quantity = quantity;
-        this.subtotal = subtotal;
-        this.tax = tax;
-        this.processingFee = processingFee;
-        this.total = total;
+//        this.subtotal = subtotal;
+//        this.tax = tax;
+//        this.processingFee = processingFee;
+//        this.total = total;
+
     }
 
-    public void Invoice() {
+    public InvoiceViewModel() {
     }
 
     public Integer getId() {

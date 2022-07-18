@@ -15,8 +15,6 @@ import java.util.List;
 @RestController
 public class ConsoleController {
 
-    @Autowired
-    ConsoleRepository consoleRepository;
 
     @Autowired
     ServiceLayer serviceLayer;

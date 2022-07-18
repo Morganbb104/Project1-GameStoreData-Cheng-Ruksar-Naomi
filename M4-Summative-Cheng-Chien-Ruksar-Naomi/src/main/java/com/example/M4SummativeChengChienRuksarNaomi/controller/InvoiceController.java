@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,10 +23,10 @@ public class InvoiceController {
     @PostMapping("/invoice")
     //using created to give us the status on whether or not the record was creaated
     @ResponseStatus(HttpStatus.CREATED)
-    public InvoiceViewModel addInvoice(@RequestBody InvoiceViewModel invoiceViewModel) {
+    public InvoiceViewModel addInvoice(@RequestBody @Valid InvoiceViewModel invoice) {
 //
         //saving the new customer in  the repo, whys this so simple
-        return serviceLayer.saveInvoice(invoiceViewModel);
+        return serviceLayer.saveInvoice(invoice);
     }
     @GetMapping("/invoice")
     @ResponseStatus(HttpStatus.OK)

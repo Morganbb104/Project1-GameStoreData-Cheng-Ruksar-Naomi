@@ -3,15 +3,18 @@ package com.example.M4SummativeChengChienRuksarNaomi.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
-
+@Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "processing_fee")
-public class ProcessingFee extends Invoice {
-
+public class ProcessingFee {
+    @Id
     @NotNull
     @Column(name = "product_type")
     private String productType;
@@ -36,7 +39,7 @@ public class ProcessingFee extends Invoice {
 
     public BigDecimal getFee() {
 
-        return fee;
+        return fee.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setFee(BigDecimal fee) {

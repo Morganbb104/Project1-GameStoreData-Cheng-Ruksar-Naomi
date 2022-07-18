@@ -10,14 +10,15 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-
+@Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "sales_tax_rate")
 public class SalesTaxRate {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Size(min = 2, max = 2)
+    @Column(name = "state")
     public String state;
 
     @NotNull

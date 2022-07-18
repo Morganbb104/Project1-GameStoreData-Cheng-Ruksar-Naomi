@@ -11,6 +11,6 @@ import java.util.List;
 
 
 @Repository
-public interface SalesTaxRateRepository extends JpaRepository<Invoice, String> {
-   SalesTaxRate findByState(String state);
+public interface SalesTaxRateRepository extends JpaRepository<SalesTaxRate, String> {
+   //SalesTaxRate findByState(String state);
 }

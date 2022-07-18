@@ -21,28 +21,19 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class TshirtRepositoryTest {
 
-        @Autowired
-        GameRepository gameRepository;
-        @Autowired
-        ConsoleRepository consoleRepository;
-        @Autowired
-        InvoiceRepository invoiceRepository;
+
         @Autowired
         TshirtRepository tshirtRepository;
-        @Autowired
-        ProcessingFeeRepository processingFeeRepository;
-        @Autowired
-        SalesTaxRateRepository salesTaxRateRepository;
+
 
         @Before
         public void setUp() throws Exception {
+            tshirtRepository.deleteAll();
 
-       gameRepository.deleteAll();
-       consoleRepository.deleteAll();
-       invoiceRepository.deleteAll();
-       tshirtRepository.deleteAll();
-       processingFeeRepository.deleteAll();
-       salesTaxRateRepository.deleteAll();
+            tshirtRepository.save(new Tshirt(1, "small", "black", "Black t-shirt", BigDecimal.valueOf(10.00), 20 ));
+            tshirtRepository.save(new Tshirt(2, "small", "white", "white t-shirts", BigDecimal.valueOf(10.00), 20 ));
+            tshirtRepository.save(new Tshirt(3, "medium", "black", "T-Shirt", BigDecimal.valueOf(10.00), 10 ));
+
         }
 
         @Test
@@ -53,7 +44,7 @@ public class TshirtRepositoryTest {
             Tshirt tshirt = new Tshirt();
             tshirt.setQuantity(4);
             tshirt.setDescription("This is a tshirt");
-            tshirt.setPrice(BigDecimal.valueOf(20.00));
+            tshirt.setPrice(new BigDecimal("20.00"));
             tshirt.setSize("L");
             tshirt.setColor("Blue");
 
@@ -71,19 +62,6 @@ public class TshirtRepositoryTest {
 
         }
 
-        @Test(expected  = DataIntegrityViolationException.class)
-        public void addWithRefIntegrityException() {
-
-            Tshirt tshirt = new Tshirt();
-            tshirt.setQuantity(4);
-            tshirt.setDescription("This is a tshirt");
-            tshirt.setPrice(BigDecimal.valueOf(20.00));
-            tshirt.setSize("L");
-            tshirt.setColor("Blue");
-
-            tshirt = tshirtRepository.save(tshirt);
-
-        }
 
         @Test
         public void getAllTshirts() {
@@ -92,24 +70,24 @@ public class TshirtRepositoryTest {
             Tshirt tshirt = new Tshirt();
             tshirt.setQuantity(4);
             tshirt.setDescription("This is a tshirt");
-            tshirt.setPrice(BigDecimal.valueOf(20.00));
-            tshirt.setSize("L");
-            tshirt.setColor("Blue");
+            tshirt.setPrice(new BigDecimal("20.00"));
+            tshirt.setSize("medium");
+            tshirt.setColor("blue");
 
             tshirt = tshirtRepository.save(tshirt);
 
             Tshirt tshirt1 = new Tshirt();
             tshirt1.setQuantity(4);
             tshirt1.setDescription("This is a tshirt");
-            tshirt1.setPrice(BigDecimal.valueOf(20.00));
-            tshirt1.setSize("L");
-            tshirt1.setColor("Blue");
+            tshirt1.setPrice(new BigDecimal("20.00"));
+            tshirt1.setSize("small");
+            tshirt1.setColor("blue");
 
             tshirt1 = tshirtRepository.save(tshirt1);
 
-            List<Tshirt> aList = tshirtRepository.findAll();
+            List<Tshirt> tshirts = tshirtRepository.findAll();
 
-            assertEquals(aList.size(), 2);
+            assertEquals(5, tshirts.size());
 
         }
 
@@ -119,7 +97,7 @@ public class TshirtRepositoryTest {
             Tshirt tshirt = new Tshirt();
             tshirt.setQuantity(4);
             tshirt.setDescription("This is a tshirt");
-            tshirt.setPrice(BigDecimal.valueOf(20.00));
+            tshirt.setPrice(new BigDecimal("20.00"));
             tshirt.setSize("L");
             tshirt.setColor("Blue");
             tshirt = tshirtRepository.save(tshirt);
@@ -137,22 +115,17 @@ public class TshirtRepositoryTest {
 
 
         @Test
-    public void findBySize() {
-            Tshirt tshirt = new Tshirt();
-            tshirt.setQuantity(4);
-            tshirt.setDescription("This is a tshirt");
-            tshirt.setPrice(BigDecimal.valueOf(20.00));
-            tshirt.setSize("L");
-            tshirt.setColor("Blue");
-            tshirtRepository.save(tshirt);
+        public void shouldReturnTshirtsBySize() {
 
+                List<Tshirt> tshirt = tshirtRepository.findBySize("small");
 
-            List<Tshirt> tshirt1 = tshirtRepository.findBySize(tshirt.getSize());
-
-            assertEquals(tshirt1, tshirt);
-    }
+                assertEquals(2, tshirt.size());
+        }
 
     @Test
     public void findByColor() {
+
+            List<Tshirt> tshirt = tshirtRepository.findByColor("black");
+            assertEquals(2, tshirt.size());
     }
 }
