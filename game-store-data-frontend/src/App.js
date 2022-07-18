@@ -7,16 +7,14 @@ import Tshirts from "./Tshirts.js"
 import Header from "./Header"
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("Consoles");
+  const [currentPage, setCurrentPage] = useState("Header");
 
   // TODO: its rendering the pages
   const renderPage = () => {
     if (currentPage === "Games") {
-      console.log(Games, "games")
       return <Games />;
     }
     if (currentPage === "Consoles") {
-      console.log(Consoles, "consoles")
       return <Consoles />;
     }
     if (currentPage === "Tshirts") {
@@ -31,7 +29,6 @@ function App() {
 
   const handlePageChange = (e, page) => {
     e.preventDefault();
-    alert("changing page", page)
     setCurrentPage(page);
   }
 
