@@ -477,9 +477,11 @@ public class ServiceLayer {
         invoice.setSubtotal(subTotal);
 
         //BigDecimal.valueOf(itemQuantity)
-
-        //(invoice.getUnitPrice() * invoice.getQuantity());
-        BigDecimal theTaxRate = salesTaxRateRepository.findById(invoice.getState()).get().getRate();
+        if(!salesTaxRateRepository.findById(invoice.getState()).isPresent()) {
+                throw new IllegalArgumentException("can't get the state");
+        }
+            //(invoice.getUnitPrice() * invoice.getQuantity());
+            BigDecimal theTaxRate = salesTaxRateRepository.findById(invoice.getState()).get().getRate();
 
         //(invoice.getState()).get().getTaxRate();
         //get tax calc tax and set tax (taxes repo)

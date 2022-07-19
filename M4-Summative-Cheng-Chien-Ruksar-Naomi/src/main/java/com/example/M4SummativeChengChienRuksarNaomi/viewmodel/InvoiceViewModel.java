@@ -3,6 +3,7 @@ package com.example.M4SummativeChengChienRuksarNaomi.viewmodel;
 import com.example.M4SummativeChengChienRuksarNaomi.models.Invoice;
 import com.example.M4SummativeChengChienRuksarNaomi.models.ProcessingFee;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,7 +27,6 @@ public class InvoiceViewModel {
     private String state;
 
     private String zipcode;
-
 
 
     private String itemType;

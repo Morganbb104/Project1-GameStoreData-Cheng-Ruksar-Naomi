@@ -24,7 +24,7 @@ public class InvoiceController {
     //using created to give us the status on whether or not the record was creaated
     @ResponseStatus(HttpStatus.CREATED)
     public InvoiceViewModel addInvoice(@RequestBody @Valid InvoiceViewModel invoice) {
-//
+
         //saving the new customer in  the repo, whys this so simple
         return serviceLayer.saveInvoice(invoice);
     }
