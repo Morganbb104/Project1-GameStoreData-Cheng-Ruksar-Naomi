@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
-function GameForm({ Game: initialGame, notify }) {
+function GameForm({ game: initialGame, notify }) {
+    console.log(initialGame, "intial game")
 
     const [game, setGame] = useState(initialGame);
+    console.log(game ,"game id")
     const isAdd = initialGame.id === 0;
+    console.log(initialGame.id)
+
 
     function handleChange(evt) {
         const clone = { ...game };
@@ -14,9 +18,10 @@ function GameForm({ Game: initialGame, notify }) {
     function handleSubmit(evt) {
         evt.preventDefault();
 
-        const url = isAdd ? "http://localhost:8080/game" : `http://localhost:8080/game/${game.id}`;
+        const url = isAdd ? "http://localhost:8080/game" : `http://localhost:8080/game`;
         const method = isAdd ? "POST" : "PUT";
         const expectedStatus = isAdd ? 201 : 204;
+        console.log(game.id)
 
         const init = {
             method,
@@ -50,40 +55,41 @@ function GameForm({ Game: initialGame, notify }) {
     return (
         <>
             <h1>{game.id > 0 ? "Edit" : "Add"} Game</h1>
+    
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="artist">Artist</label>
-                    <input type="text" id="artist" name="artist"
+                    <label htmlFor="esrbRating">Esrb Rating</label>
+                    <input type="text" id="esrbRating" name="esrbRating"
                         className="form-control"
                         value={game.esrbRating} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="album">Album</label>
-                    <input type="text" id="album" name="album"
+                    <label htmlFor="title">Title</label>
+                    <input type="text" id="title" name="title"
                         className="form-control"
                         value={game.title} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="year">Year</label>
-                    <input type="text" id="year" name="year"
+                    <label htmlFor="description">Description</label>
+                    <input type="text" id="description" name="description"
                         className="form-control"
                         value={game.description} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="year">Year</label>
-                    <input type="text" id="year" name="year"
+                    <label htmlFor="price">Price</label>
+                    <input type="text" id="price" name="price"
                         className="form-control"
                         value={game.price} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="year">Year</label>
-                    <input type="text" id="year" name="year"
+                    <label htmlFor="studio">Studio</label>
+                    <input type="text" id="studio" name="studio"
                         className="form-control"
                         value={game.studio} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="year">Year</label>
-                    <input type="text" id="year" name="year"
+                    <label htmlFor="quantity">Quantity</label>
+                    <input type="text" id="quantity" name="quantity"
                         className="form-control"
                         value={game.quantity} onChange={handleChange} />
                 </div>

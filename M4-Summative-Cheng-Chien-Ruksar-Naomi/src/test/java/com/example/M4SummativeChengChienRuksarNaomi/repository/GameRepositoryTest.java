@@ -22,26 +22,15 @@ public class GameRepositoryTest {
 
         @Autowired
         GameRepository gameRepository;
-        @Autowired
-        ConsoleRepository consoleRepository;
-        @Autowired
-        InvoiceRepository invoiceRepository;
-        @Autowired
-        TshirtRepository tshirtRepository;
-        @Autowired
-        ProcessingFeeRepository processingFeeRepository;
-        @Autowired
-        SalesTaxRateRepository salesTaxRateRepository;
 
         @Before
         public void setUp() throws Exception {
 
             gameRepository.deleteAll();
-            consoleRepository.deleteAll();
-            invoiceRepository.deleteAll();
-            tshirtRepository.deleteAll();
-            processingFeeRepository.deleteAll();
-            salesTaxRateRepository.deleteAll();
+
+            gameRepository.save(new Games("2","Tasmania","The Hobart creature",BigDecimal.valueOf(6.00),"Laucenston studio",7));
+            gameRepository.save(new Games("3","Perth","The Perth fish",BigDecimal.valueOf(7.00),"Naevest studio",6));
+            gameRepository.save(new Games("4","Canberra","The Canberra man",BigDecimal.valueOf(8.00),"Martera studio",5));
         }
 
         @Test
@@ -52,7 +41,7 @@ public class GameRepositoryTest {
             Games game = new Games();
             game.setTitle("The Game");
             game.setDescription("This is a game");
-            game.setPrice(BigDecimal.valueOf(20.00));
+            game.setPrice(new BigDecimal("20.00"));
             game.setStudio("game studio");
             game.setEsrbRating("not suitable");
             game.setQuantity(5);
@@ -72,13 +61,13 @@ public class GameRepositoryTest {
 
         }
 
-        @Test(expected  = DataIntegrityViolationException.class)
+        @Test
         public void addWithRefIntegrityException() {
 
             Games game = new Games();
             game.setQuantity(4);
             game.setDescription("This is a game");
-            game.setPrice(BigDecimal.valueOf(20.00));
+            game.setPrice(new BigDecimal("20.00"));
             game.setStudio("game studio");
             game.setEsrbRating("not suitable");
             game.setTitle("The Game");
@@ -93,7 +82,7 @@ public class GameRepositoryTest {
             Games game = new Games();
             game.setQuantity(4);
             game.setDescription("This is a game");
-            game.setPrice(BigDecimal.valueOf(20.00));
+            game.setPrice(new BigDecimal("20.00"));
             game.setStudio("game studio");
             game.setEsrbRating("not suitable");
             game.setTitle("The Game");
@@ -104,16 +93,16 @@ public class GameRepositoryTest {
 
             game1.setQuantity(4);
             game1.setDescription("This is a game");
-            game1.setPrice(BigDecimal.valueOf(20.00));
+            game1.setPrice(new BigDecimal("10.00"));
             game1.setStudio("game studio");
             game1.setEsrbRating("not suitable");
             game1.setTitle("The Game");
 
             game1 = gameRepository.save(game1);
 
-            List<Games> aList = gameRepository.findAll();
+            List<Games> Games = gameRepository.findAll();
 
-            assertEquals(aList.size(), 2);
+            assertEquals(5,Games.size());
 
         }
 
@@ -124,7 +113,7 @@ public class GameRepositoryTest {
 
             game.setQuantity(4);
             game.setDescription("This is a game");
-            game.setPrice(BigDecimal.valueOf(20.00));
+            game.setPrice(new BigDecimal("20.00"));
             game.setStudio("game studio");
             game.setEsrbRating("not suitable");
             game.setTitle("The Game");
@@ -146,22 +135,10 @@ public class GameRepositoryTest {
         public void findByStudio() {
             Games game = new Games();
 
-            game.setQuantity(4);
-            game.setDescription("This is a game");
-            game.setPrice(BigDecimal.valueOf(20.00));
-            game.setStudio("game studio");
-            game.setEsrbRating("not suitable");
-            game.setTitle("The Game");
-            gameRepository.save(game);
+            List<Games> game1 = gameRepository.findByStudio("Naevest studio");
 
-
-            List<Games> game1 = gameRepository.findByStudio(game.getStudio());
-
-            assertEquals(game1.get(1), game);
+            assertEquals(1,game1.size());
         }
-
-
-
 
 
 
@@ -169,36 +146,17 @@ public class GameRepositoryTest {
     @Test
     public void findByEsrbRating() {
         Games game = new Games();
+        List<Games> game1 = gameRepository.findByEsrbRating("2");
 
-        game.setQuantity(4);
-        game.setDescription("This is a game");
-        game.setPrice(BigDecimal.valueOf(20.00));
-        game.setStudio("game studio");
-        game.setEsrbRating("not suitable");
-        game.setTitle("The Game");
-        gameRepository.save(game);
-
-
-        List<Games> game1 = gameRepository.findByEsrbRating(game.getStudio());
-
-        assertEquals(game1.get(1), game);
+        assertEquals(1,game1.size());
     }
 
     @Test
     public void findByTitle() {
         Games game = new Games();
 
-        game.setQuantity(4);
-        game.setDescription("This is a game");
-        game.setPrice(BigDecimal.valueOf(20.00));
-        game.setStudio("game studio");
-        game.setEsrbRating("not suitable");
-        game.setTitle("The Game");
-        gameRepository.save(game);
+        List<Games> game1 = gameRepository.findByTitle("Tasmania");
 
-
-        List<Games> game1 = gameRepository.findByTitle(game.getStudio());
-
-        assertEquals(game1.get(1), game);
+        assertEquals(1,game1.size());
     }
 }

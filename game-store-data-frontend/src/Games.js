@@ -19,8 +19,43 @@ function Games() {
     function addClick() {
         const now = new Date()
         
-        setScopedGame({ id: 0, esrbRating:"", title:"", description:"", price: 0, studio:"", quantity:2 })
+        setScopedGame({ id: 0, esrbRating:"", title:"", description:"", price: 0, studio:"", quantity:0 })
         setShowForm(true);
+    }
+    function esrbRatingClick(event) {
+        if(event.target.value===""){
+            setGames([])
+        }else{
+
+        fetch(`http://localhost:8080/game/esrbRating/${event.target.value}`)
+        .then((response)=>response.json())
+        .then(result=>setGames(result))
+        .catch(error=>console.log(error, "There was an error for your esrb rating"))
+        }
+
+    }
+    function studioClick(event) {
+        if(event.target.value===""){
+            setGames([])
+        }else{
+
+        fetch(`http://localhost:8080/game/studio/${event.target.value}`)
+        .then((response)=>response.json())
+        .then(result=>setGames(result))
+        .catch(error=>console.log(error, "There was an error for your studio"))
+        }
+
+    } function titleClick(event) {
+        if(event.target.value===""){
+            setGames([])
+        }else{
+
+        fetch(`http://localhost:8080/game/title/${event.target.value}`)
+        .then((response)=>response.json())
+        .then(result=>setGames(result))
+        .catch(error=>console.log(error, "There was an error for your title"))
+        }
+
     }
 
     function notify({ action, game, error }) {
@@ -31,7 +66,7 @@ function Games() {
         }
         switch (action) {
             case "delete":
-                setGames(game.filter(r => r.id !== game.id))
+                setGames(games.filter(r => r.id !== game.id))
                 break;
 
             case "edit-form":
@@ -39,7 +74,7 @@ function Games() {
                 setScopedGame(game)
                 return;
             case "edit":
-                setGames(game.map(r => {
+                setGames(games.map(r => {
                     if (r.id === game.id) {
                         return game
                     }
@@ -62,22 +97,46 @@ function Games() {
     }
 
     if (showForm) {
-        return <GameForm record={scopedGame} notify={notify} />
+        return <GameForm game={scopedGame} notify={notify} />
     }
 
     return (
         <>
             {error && <div className="alert alert-danger">{error}</div>}
             <div>
-                <h1 id='recordTitle'>Games</h1>
+                <h1 id='gameTitle'>Games</h1>
                 <button className="btn btn-primary" type="button" onClick={addClick}>Add a game</button>
+                
+                <select name="esrbRating" className = "btn btn-primary" onChange= {esrbRatingClick}>
+                <option >Get game by esrb rating</option>
+                <option value ="not for children">not for children</option>
+                <option value="explicit">explicit</option>
+                <option value ="everyone">everyone</option>
+
+            </select>
+            <select name="studio" className = "btn btn-primary" onChange= {studioClick}>
+                <option >Get game by studio</option>
+                <option value ="nintendo">nintendo</option>
+                <option value="atari">atari</option>
+                <option value="play station">play station</option>
+            
+
+            </select>
+            <select name="title" className = "btn btn-primary" onChange= {titleClick}>
+                <option >Get game by title</option>
+                <option value ="spiro">spiro</option>
+                <option value="star war">star war</option>
+                <option value="avatar">avatar</option>
+            
+
+            </select>
                 <table id='games'>
                     <tr>
                         <th>Title</th>
                         <th>Description</th>
                         <th>Price</th>
                         <th>Studio</th>
-                        <th>quantity</th>
+                        <th>Quantity</th>
                         <th>Esrb Rating</th>
                     </tr>
                     <tbody>

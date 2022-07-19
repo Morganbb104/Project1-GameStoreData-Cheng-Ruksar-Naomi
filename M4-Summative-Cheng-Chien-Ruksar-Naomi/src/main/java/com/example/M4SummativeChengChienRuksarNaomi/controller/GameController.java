@@ -57,7 +57,7 @@ public class GameController {
         return serviceLayer.findGameByTitle(title);
     }
 
-    @PutMapping("/game/")
+    @PutMapping("/game")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateGame(@RequestBody GameViewModel gameViewModel) {
         serviceLayer.updateGame(gameViewModel);

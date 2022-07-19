@@ -2,6 +2,7 @@ package com.example.M4SummativeChengChienRuksarNaomi.repository;
 
 import com.example.M4SummativeChengChienRuksarNaomi.models.Console;
 
+import com.example.M4SummativeChengChienRuksarNaomi.models.Games;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,40 +21,28 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class ConsoleRepositoryTest {
 
-
-    @Autowired
-    GameRepository gameRepository;
     @Autowired
     ConsoleRepository consoleRepository;
-    @Autowired
-    InvoiceRepository invoiceRepository;
-    @Autowired
-    TshirtRepository tshirtRepository;
-    @Autowired
-    ProcessingFeeRepository processingFeeRepository;
-    @Autowired
-    SalesTaxRateRepository salesTaxRateRepository;
 
     @Before
     public void setUp() throws Exception {
-
-        gameRepository.deleteAll();
         consoleRepository.deleteAll();
-        invoiceRepository.deleteAll();
-        tshirtRepository.deleteAll();
-        processingFeeRepository.deleteAll();
-        salesTaxRateRepository.deleteAll();
+
+        consoleRepository.save(new Console("2","Sony","16GB","i7",BigDecimal.valueOf(600.00),54));
+        consoleRepository.save(new Console("3","Apple","32GB","i8",BigDecimal.valueOf(700.00),40));
+        consoleRepository.save(new Console("4","TSMC","64GB","i9",BigDecimal.valueOf(800.00),31));
+
     }
 
     @Test
-    public void addGetDeleteGame() {
+    public void addGetDeleteConsole() {
 
         // Need to create a Label and an Artist first
 
         Console console = new Console();
         console.setMemoryAmount("5g");
         console.setProcessor("intel");
-        console.setPrice(BigDecimal.valueOf(20.00));
+        console.setPrice(new BigDecimal("20.00"));
         console.setModel("newest");
         console.setManufacturer("this");
         console.setQuantity(5);
@@ -63,7 +52,7 @@ public class ConsoleRepositoryTest {
 
         Optional<Console> console1 = consoleRepository.findById(console.getId());
 
-        assertEquals(console1.get(), console);
+        assertEquals(console1.get(),console);
 
         consoleRepository.deleteById(console.getId());
 
@@ -73,19 +62,6 @@ public class ConsoleRepositoryTest {
 
     }
 
-    @Test(expected  = DataIntegrityViolationException.class)
-    public void addWithRefIntegrityException() {
-
-        Console console = new Console();
-        console.setMemoryAmount("5g");
-        console.setProcessor("intel");
-        console.setPrice(BigDecimal.valueOf(20.00));
-        console.setModel("newest");
-        console.setManufacturer("this");
-        console.setQuantity(5);
-        console = consoleRepository.save(console);
-
-    }
 
     @Test
     public void getAllConsole() {
@@ -103,7 +79,7 @@ public class ConsoleRepositoryTest {
 
         Console console1 = new Console();
 
-        console1.setQuantity(4);
+
         console1.setMemoryAmount("5g");
         console1.setProcessor("intel");
         console1.setPrice(BigDecimal.valueOf(20.00));
@@ -113,9 +89,9 @@ public class ConsoleRepositoryTest {
 
         console1 = consoleRepository.save(console1);
 
-        List<Console> aList = consoleRepository.findAll();
+        List<Console> consoles = consoleRepository.findAll();
 
-        assertEquals(aList.size(), 2);
+        assertEquals(5,consoles.size());
 
     }
 
@@ -125,7 +101,7 @@ public class ConsoleRepositoryTest {
         Console console = new Console();
         console.setMemoryAmount("5g");
         console.setProcessor("intel");
-        console.setPrice(BigDecimal.valueOf(20.00));
+        console.setPrice(new BigDecimal("20.00"));
         console.setModel("newest");
         console.setManufacturer("this");
         console.setQuantity(5);
@@ -133,7 +109,7 @@ public class ConsoleRepositoryTest {
 
         console.setQuantity(5);
         console.setModel("newr");
-        console.setPrice(BigDecimal.valueOf(20));
+        console.setPrice(new BigDecimal("30.00"));
 
         consoleRepository.save(console);
 
@@ -147,7 +123,7 @@ public class ConsoleRepositoryTest {
     public void findByManufacturer() {
         Console console = new Console();
 
-        console.setQuantity(4);
+
         console.setMemoryAmount("5g");
         console.setProcessor("intel");
         console.setPrice(BigDecimal.valueOf(20.00));
@@ -159,7 +135,7 @@ public class ConsoleRepositoryTest {
 
         List<Console> console1 = consoleRepository.findByManufacturer(console.getManufacturer());
 
-        assertEquals(console1.get(1), console);
+        assertEquals(1,console1.size());
     }
 
 
