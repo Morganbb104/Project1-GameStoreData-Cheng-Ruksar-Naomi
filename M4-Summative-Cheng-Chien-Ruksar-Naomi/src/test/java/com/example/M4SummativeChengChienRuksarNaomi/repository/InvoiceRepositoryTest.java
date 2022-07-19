@@ -52,6 +52,7 @@ public class InvoiceRepositoryTest {
         Optional<Invoice> invoice1 = invoiceRepository.findById(invoice.getId());
         assertEquals(invoice1.get().getId(),invoice.getId());
 
+        invoiceRepository.deleteById(invoice.getId());
         invoice1 = invoiceRepository.findById(invoice.getId());
         assertFalse(invoice1.isPresent());
 

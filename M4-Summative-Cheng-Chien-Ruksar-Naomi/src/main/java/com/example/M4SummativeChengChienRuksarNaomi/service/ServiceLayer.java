@@ -77,7 +77,7 @@ public class ServiceLayer {
 
     public List<GameViewModel> findGameByTitle(String title) {
 //
-        List<Games> gamesList = gameRepository.findByStudio(title);
+        List<Games> gamesList = gameRepository.findByTitle(title);
         List<GameViewModel> games = new ArrayList<>();
         //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
         for (int i = 0; i < gamesList.size(); i++) {
