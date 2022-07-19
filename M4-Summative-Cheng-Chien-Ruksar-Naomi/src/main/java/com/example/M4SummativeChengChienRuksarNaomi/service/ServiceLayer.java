@@ -516,34 +516,6 @@ public class ServiceLayer {
 
         return buildInvoiceViewModel(invoice);
     }
-    public BigDecimal findSalesTaxByState(String state) {
-//            List<Tshirt> tshirts = tshirtRepository.findAll();
-        Invoice invoice =new Invoice();
-        //SalesTaxRate salesTax = invoiceRepository.getState();
-         SalesTaxRateViewModel salesTaxRate= new SalesTaxRateViewModel();
-        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
-
-         buildSalesTaxRateViewModel(salesTaxRateRepository.findById(invoice.getState()).get());
-
-        return salesTaxRate.getRate();
-
-    }
-    private SalesTaxRateViewModel buildSalesTaxRateViewModel(SalesTaxRate salesTaxRate) {
-        Invoice invoice =new Invoice();
-
-        SalesTaxRate salesTaxRate1 = (SalesTaxRate) salesTaxRateRepository.findById(invoice.getState()).get();
-
-
-        SalesTaxRateViewModel salesTaxRateViewModel = new SalesTaxRateViewModel();
-
-salesTaxRateViewModel.getRate();
-salesTaxRateViewModel.getState();
-
-
-
-
-        return salesTaxRateViewModel;
-    }
 
     public InvoiceViewModel findInvoice(Integer id) {
 
@@ -626,8 +598,41 @@ salesTaxRateViewModel.getState();
         invoiceRepository.deleteById(id);
 
     }
+    public BigDecimal findSalesTaxByState(String state) {
+//            List<Tshirt> tshirts = tshirtRepository.findAll();
+        Invoice invoice =new Invoice();
+        //SalesTaxRate salesTax = invoiceRepository.getState();
+         SalesTaxRateViewModel salesTaxRate= new SalesTaxRateViewModel();
+        //test the list if its null then pass it to build tshirt view model and retrun list of tshirt view models
 
-    //Create Operation For Processing Fee//Create Operation For Processing Fee
+         buildSalesTaxRateViewModel(salesTaxRateRepository.findById(invoice.getState()).get());
+
+        return salesTaxRate.getRate();
+
+    }
+    private SalesTaxRateViewModel buildSalesTaxRateViewModel(SalesTaxRate salesTaxRate) {
+        Invoice invoice =new Invoice();
+
+        SalesTaxRate salesTaxRate1 = (SalesTaxRate) salesTaxRateRepository.findById(invoice.getState()).get();
+
+
+        SalesTaxRateViewModel salesTaxRateViewModel = new SalesTaxRateViewModel();
+
+        salesTaxRateViewModel.getRate();
+        salesTaxRateViewModel.getState();
+
+        return salesTaxRateViewModel;
+    }
+
+//    @Transactional
+//    public List<ProcessingFee> getAllProcessingFee(){
+//        this.processingFeeRepository = processingFeeRepository;
+//        return processingFeeRepository.findAll();
+//    }
+
+
+
+
 
    }
 

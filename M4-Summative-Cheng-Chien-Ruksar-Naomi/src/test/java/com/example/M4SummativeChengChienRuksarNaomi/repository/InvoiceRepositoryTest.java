@@ -22,16 +22,16 @@ public class InvoiceRepositoryTest {
     InvoiceRepository invoiceRepository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception{
         invoiceRepository.deleteAll();
-        invoiceRepository.save(new Invoice(1, "Cheng", "Shoreline St", "Seattle", "WA", "98129", "game", 1, BigDecimal.valueOf(20.00), 2, BigDecimal.valueOf(40.00), BigDecimal.valueOf(2), BigDecimal.valueOf(1.49), BigDecimal.valueOf(43.49)));
-        invoiceRepository.save(new Invoice(2, "Ruksar", "CA St", "Seattle", "WA", "90000", "console", 2, BigDecimal.valueOf(10.00), 2, BigDecimal.valueOf(20.00), BigDecimal.valueOf(1), BigDecimal.valueOf(14.99), BigDecimal.valueOf(35.99)));
-        invoiceRepository.save(new Invoice(3, "Naomi", "WA St", "somewhere in CA", "CA", "90009", "tshirt", 3, BigDecimal.valueOf(5.00), 2, BigDecimal.valueOf(10.00), BigDecimal.valueOf(0.70), BigDecimal.valueOf(1.98), BigDecimal.valueOf(12.68)));
+        invoiceRepository.save(new Invoice(1,"Cheng", "Shoreline St", "Seattle", "WA", "98129", "game", 1, BigDecimal.valueOf(20.00), 2,BigDecimal.valueOf(40.00),BigDecimal.valueOf(2),BigDecimal.valueOf(1.49),BigDecimal.valueOf(43.49)));
+        invoiceRepository.save(new Invoice(2,"Ruksar", "CA St", "Seattle", "WA", "90000", "console", 2, BigDecimal.valueOf(10.00), 2,BigDecimal.valueOf(20.00),BigDecimal.valueOf(1),BigDecimal.valueOf(14.99),BigDecimal.valueOf(35.99)));
+        invoiceRepository.save(new Invoice(3,"Naomi", "WA St", "somewhere in CA", "CA", "90009", "tshirt", 3, BigDecimal.valueOf(5.00), 2,BigDecimal.valueOf(10.00),BigDecimal.valueOf(0.70),BigDecimal.valueOf(1.98),BigDecimal.valueOf(12.68)));
 
     }
 
     @Test
-    public void addGetDeleteInvoice() {
+    public void addGetDeleteInvoice(){
         //add invoice
         Invoice invoice = new Invoice();
         invoice.setName("Cheng2");
@@ -50,11 +50,12 @@ public class InvoiceRepositoryTest {
 
         invoice = invoiceRepository.save(invoice);
         Optional<Invoice> invoice1 = invoiceRepository.findById(invoice.getId());
-        assertEquals(invoice1.get().getId(), invoice.getId());
+        assertEquals(invoice1.get().getId(),invoice.getId());
 
         invoiceRepository.deleteById(invoice.getId());
         invoice1 = invoiceRepository.findById(invoice.getId());
         assertFalse(invoice1.isPresent());
+
 
 
     }
@@ -79,17 +80,16 @@ public class InvoiceRepositoryTest {
         invoice.setProcessingFee(new BigDecimal("1.98"));
         invoice.setTotal(new BigDecimal("22.98"));
 
-        invoice = invoiceRepository.save(invoice);
+        invoice =invoiceRepository.save(invoice);
         invoice.setZipcode("12345");
         invoiceRepository.save(invoice);
-        Optional<Invoice> invoice1 = invoiceRepository.findById(invoice.getId());
-        assertEquals(invoice1.get(), invoice);
+        Optional<Invoice> invoice1 =invoiceRepository.findById(invoice.getId());
+        assertEquals(invoice1.get(),invoice);
 
     }
-
     //findInvoiceByID
     @Test
-    public void shouldFindInvoiceById() {
+    public void shouldFindInvoiceById(){
         Invoice invoice = new Invoice();
 
         invoice.setName("Cheng3");
@@ -106,18 +106,21 @@ public class InvoiceRepositoryTest {
         invoice.setProcessingFee(new BigDecimal("1.98"));
         invoice.setTotal(new BigDecimal("22.98"));
 
-        invoice = invoiceRepository.save(invoice);
-        Optional<Invoice> invoice1 = invoiceRepository.findById(invoice.getId());
-        assertEquals(invoice1.get(), invoice);
+        invoice =invoiceRepository.save(invoice);
+        Optional<Invoice> invoice1 =invoiceRepository.findById(invoice.getId());
+        assertEquals(invoice1.get(),invoice);
+//        Optional<Invoice> invoice = invoiceRepository.findById(3);
+//        assertEquals(invoice, invoice.get().getId());
 
 
     }
 
-//    //findALLInvoice
+    //    //findALLInvoice
     @Test
     public void getAllInvoices(){
 
-
-}
+        List<Invoice> invoice = invoiceRepository.findAll();
+        assertEquals(3, invoice.size());
+    }
 
 }
