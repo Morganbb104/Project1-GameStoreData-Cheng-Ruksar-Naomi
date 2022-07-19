@@ -109,58 +109,18 @@ public class InvoiceRepositoryTest {
         invoice =invoiceRepository.save(invoice);
         Optional<Invoice> invoice1 =invoiceRepository.findById(invoice.getId());
         assertEquals(invoice1.get(),invoice);
+//        Optional<Invoice> invoice = invoiceRepository.findById(3);
+//        assertEquals(invoice, invoice.get().getId());
 
 
     }
 
-//    //findALLInvoice
-//    @Test
-//    public void getAllInvoices(){
-//        Invoice invoice = new Invoice();
-//
-//        invoice.setName("Cheng3");
-//        invoice.setStreet("Aurora1");
-//        invoice.setCity("Kirkland");
-//        invoice.setState("WA");
-//        invoice.setZipcode("86543");
-//        invoice.setItemType("Consoles");
-//        invoice.setItemId(12);
-//        invoice.setUnitPrice(new BigDecimal("10.00"));
-//        invoice.setQuantity(2);
-//        invoice.setSubtotal(new BigDecimal("20.00"));
-//        invoice.setTax(new BigDecimal("1.00"));
-//        invoice.setProcessingFee(new BigDecimal("1.98"));
-//        invoice.setTotal(new BigDecimal("22.98"));
-//
-//        invoice =invoiceRepository.save(invoice);
-//
-//        Invoice invoice1 = new Invoice();
-//
-//        invoice1.setName("Cheng4");
-//        invoice1.setStreet("Aurora3");
-//        invoice1.setCity("Kirkland");
-//        invoice1.setState("WA");
-//        invoice1.setZipcode("86543");
-//        invoice1.setItemType("Consoles");
-//        invoice1.setItemId(12);
-//        invoice1.setUnitPrice(new BigDecimal("10.00"));
-//        invoice1.setQuantity(2);
-//        invoice1.setSubtotal(new BigDecimal("20.00"));
-//        invoice1.setTax(new BigDecimal("1.00"));
-//        invoice1.setProcessingFee(new BigDecimal("1.98"));
-//        invoice1.setTotal(new BigDecimal("22.98"));
-//        invoice1 =invoiceRepository.save(invoice1);
-//
-//
+    //    //findALLInvoice
+    @Test
+    public void getAllInvoices(){
 
-//        invoice1 =invoiceRepository.save(invoice1);
-//        Optional<Invoice> invoice1 =invoiceRepository.findAll();
-//        assertEquals(5,invoice.size());
-//
-////        invoice =invoiceRepository.save(invoice);
-////        Optional<Invoice> invoice1 =invoiceRepository.findById(invoice.getId());
-////        assertEquals(invoice1.get(),invoice);
-//
-//    }
+        List<Invoice> invoice = invoiceRepository.findAll();
+        assertEquals(3, invoice.size());
+    }
 
 }
