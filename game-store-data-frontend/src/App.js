@@ -1,13 +1,14 @@
 
-import './App.css';
-import React, { useState } from "react";
-import Games from "./Games.js"
-import Consoles from "./Consoles.js"
-import Tshirts from "./Tshirts.js"
+import Games from "./Games";
+import Consoles from "./Consoles";
+import Tshirts from"./Tshirts"
 import Header from "./Header"
+import { useState } from 'react';
+
+
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("Header");
+  const [currentPage, setCurrentPage] = useState("Games");
 
   // TODO: its rendering the pages
   const renderPage = () => {
@@ -19,7 +20,6 @@ function App() {
     }
     if (currentPage === "Tshirts") {
  
-      alert("Tshirt")
       return <Tshirts />;
     }
 

@@ -64,7 +64,6 @@ public class ServiceLayer {
 
         game = gameRepository.save(game);
         viewModel.setId(game.getId());
-
         return viewModel;
     }
 

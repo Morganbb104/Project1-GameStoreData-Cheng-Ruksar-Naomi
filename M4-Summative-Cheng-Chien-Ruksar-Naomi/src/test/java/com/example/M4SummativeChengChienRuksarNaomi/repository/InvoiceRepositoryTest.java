@@ -47,7 +47,6 @@ public class InvoiceRepositoryTest {
         invoice.setProcessingFee(new BigDecimal("1.98"));
         invoice.setTotal(new BigDecimal("22.98"));
 
-
         invoice = invoiceRepository.save(invoice);
         Optional<Invoice> invoice1 = invoiceRepository.findById(invoice.getId());
         assertEquals(invoice1.get().getId(),invoice);
