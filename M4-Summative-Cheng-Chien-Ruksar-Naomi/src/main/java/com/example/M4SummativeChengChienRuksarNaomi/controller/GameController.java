@@ -8,6 +8,8 @@ import com.example.M4SummativeChengChienRuksarNaomi.viewmodel.TshirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,7 +28,11 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
 
     public GameViewModel addGame(@RequestBody @Valid  GameViewModel gameViewModel) {
-
+//        if(gameViewModel.getStudio()==null){
+//
+//            System.out.println("This is the find all games");
+//            throw new
+//        }
         //saving the new customer in  the repo, whys this so simple
         return serviceLayer.saveGame(gameViewModel);
 
