@@ -15,17 +15,17 @@ public class GameViewModel {
 
 
     private Integer id;
-
+@NotNull(message = "you need a rating")
     private String esrbRating;
-
+@NotNull(message = "you need a title")
     private String title;
-
+@NotNull(message = "you need description")
     private String description;
-
+@NotNull(message = "you need a price")
     private BigDecimal price;
-
-    private String studio;
-
+    @NotNull(message = "you need a studio")
+ private String studio;
+@NotNull(message = "you need a quantity")
     private int quantity;
 
 

@@ -15,20 +15,20 @@ public class ConsoleViewModel{
 
 
     private Integer id;
-
+    @NotNull(message = "you need a model")
     private String model;
-
+    @NotNull(message = "you need a manufacturer")
     private String manufacturer;
 
-
+    @NotNull(message = "you need a memoryAmount")
     private String memoryAmount;
 
-
+    @NotNull(message = "you need a processor")
     private String processor;
 
-
+    @NotNull(message = "you need a price")
     private BigDecimal price;
-
+    @NotNull(message = "you need a quantity")
     private int quantity;
 
     public ConsoleViewModel(Integer id, String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {

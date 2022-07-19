@@ -1,5 +1,6 @@
 package com.example.M4SummativeChengChienRuksarNaomi.viewmodel;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -7,10 +8,15 @@ public class TshirtViewModel {
 
 
     private Integer id;
+    @NotNull(message = "you need a size")
     private String size;
+    @NotNull(message = "you need a color")
     private String color;
+    @NotNull(message = "you need a description")
     private String description;
+    @NotNull(message = "you need a price")
     private BigDecimal price;
+    @NotNull(message = "you need a quantity")
     private int quantity;
 
     public TshirtViewModel(Integer id,String size, String color, String description, BigDecimal price, int quantity) {
