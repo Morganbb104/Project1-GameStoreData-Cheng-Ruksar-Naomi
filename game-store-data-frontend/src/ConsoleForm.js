@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function ConsoleForm({ Console: initialConsole, notify }) {
+function ConsoleForm({ console: initialConsole, notify }) {
 
     const [console, setConsole] = useState(initialConsole);
     const isAdd = initialConsole.id === 0;
@@ -14,7 +14,7 @@ function ConsoleForm({ Console: initialConsole, notify }) {
     function handleSubmit(evt) {
         evt.preventDefault();
 
-        const url = isAdd ? "http://localhost:8080/consoles" : `http://localhost:8080/consoles/${console.id}`;
+        const url = isAdd ? "http://localhost:8080/consoles" : `http://localhost:8080/consoles`;
         const method = isAdd ? "POST" : "PUT";
         const expectedStatus = isAdd ? 201 : 204;
 
@@ -51,8 +51,8 @@ function ConsoleForm({ Console: initialConsole, notify }) {
             <h1>{console.id > 0 ? "Edit" : "Add"} Console</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="memory">Memory</label>
-                    <input type="text" id="memory" name="memory"
+                    <label htmlFor="memoryAmount">Memory Amount</label>
+                    <input type="text" id="memoryAmount" name="memoryAmount"
                         className="form-control"
                         value={console.memoryAmount} onChange={handleChange} />
                 </div>
@@ -62,12 +62,7 @@ function ConsoleForm({ Console: initialConsole, notify }) {
                         className="form-control"
                         value={console.processor} onChange={handleChange} />
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="description">Description</label>
-                    <input type="text" id="description" name="description"
-                        className="form-control"
-                        value={console.description} onChange={handleChange} />
-                </div>
+             
                 <div className="mb-3">
                     <label htmlFor="price">Price</label>
                     <input type="text" id="price" name="price"
@@ -85,6 +80,12 @@ function ConsoleForm({ Console: initialConsole, notify }) {
                     <input type="text" id="quantity" name="quantity"
                         className="form-control"
                         value={console.quantity} onChange={handleChange} />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="model">Model</label>
+                    <input type="text" id="model" name="model"
+                        className="form-control"
+                        value={console.model} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
                     <button className="btn btn-primary mr-3" type="submit">Save</button>

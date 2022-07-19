@@ -22,6 +22,32 @@ function Tshirts() {
         setScopedTshirt({ id: 0, size:"", color:"", description:"", price: 0, quantity:2 })
         setShowForm(true);
     }
+    function sizeClick(event) {
+        if(event.target.value===""){
+            setTshirts([])
+        }else{
+
+        fetch(`http://localhost:8080/tshirts/size/${event.target.value}`)
+        .then((response)=>response.json())
+        .then(result=>setTshirts(result))
+        .catch(error=>console.log(error, "There was an error for your sizes"))
+        }
+
+    }
+    function colorClick(event) {
+        if(event.target.value===""){
+            setTshirts([])
+        }else{
+
+        fetch(`http://localhost:8080/tshirts/color/${event.target.value}`)
+        .then((response)=>response.json())
+        .then(result=>setTshirts(result))
+        .catch(error=>console.log(error, "There was an error for your colors"))
+        }
+
+    }
+
+
 
     function notify({ action, tshirt, error }) {
         if (error) {
@@ -31,7 +57,7 @@ function Tshirts() {
         }
         switch (action) {
             case "delete":
-                setTshirts(tshirt.filter(r => r.id !== tshirt.id))
+                setTshirts(tshirts.filter(r => r.id !== tshirt.id))
                 break;
 
             case "edit-form":
@@ -39,7 +65,7 @@ function Tshirts() {
                 setScopedTshirt(tshirt)
                 return;
             case "edit":
-                setTshirts(tshirt.map(r => {
+                setTshirts(tshirts.map(r => {
                     if (r.id === tshirt.id) {
                         return tshirt
                     }
@@ -71,13 +97,28 @@ function Tshirts() {
             <div>
                 <h1 id='tshirtTitle'>Tshirt</h1>
                 <button className="btn btn-primary" type="button" onClick={addClick}>Add a tshirt</button>
+                
+                <select name="color" className = "btn btn-primary" onChange= {colorClick}>
+                <option >Get tshirt by color</option>
+                <option value ="green">green</option>
+                <option value="blue">blue</option>
+                <option value ="red">red</option>
+
+            </select>
+            <select name="level" className = "btn btn-primary" onChange= {sizeClick}>
+                <option >Get tshirt size</option>
+                <option value ="large">Large</option>
+                <option value="small">Small</option>
+            
+
+            </select>
                 <table id='tshirts'>
                     <tr>
                         <th>Size</th>
                         <th>Color</th>
                         <th>Price</th>
                         <th>Description</th>
-                        <th>quantity</th>
+                        <th>Quantity</th>
                       
                     </tr>
                     <tbody>

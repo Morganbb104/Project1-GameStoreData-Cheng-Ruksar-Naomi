@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function TshirtForm({ Tshirt: initialTshirt, notify }) {
+function TshirtForm({ tshirt: initialTshirt, notify }) {
 
     const [tshirts, setTshirt] = useState(initialTshirt);
     const isAdd = initialTshirt.id === 0;
@@ -14,7 +14,7 @@ function TshirtForm({ Tshirt: initialTshirt, notify }) {
     function handleSubmit(evt) {
         evt.preventDefault();
 
-        const url = isAdd ? "http://localhost:8080/tshirts" : `http://localhost:8080/tshirts/${tshirts.id}`;
+        const url = isAdd ? "http://localhost:8080/tshirts" : `http://localhost:8080/tshirts`;
         const method = isAdd ? "POST" : "PUT";
         const expectedStatus = isAdd ? 201 : 204;
 

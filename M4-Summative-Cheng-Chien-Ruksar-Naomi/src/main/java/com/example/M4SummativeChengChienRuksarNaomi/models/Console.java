@@ -14,28 +14,24 @@ public class Console {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "console_id")
 
     private Integer id;
 
-    @NotNull
+
     private String model;
 
-    @NotNull
+
     private String manufacturer;
 
-
     @Column(name = "memory_amount")
-    @NotNull
     private String memoryAmount;
 
-    @NotNull
     private String processor;
 
-    @NotNull
     private BigDecimal price;
-    @NotNull
+
     private int quantity;
 
     public Console(Integer id, String model, String manufacturer, String memoryAmount, String processor, BigDecimal price, int quantity) {
